@@ -1,0 +1,526 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.dashboard-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboard-header {
+    background-color: #008163;
+    color: white;
+    padding: 1rem 2rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.logo {
+    height: 40px;
+    width: auto;
+}
+
+.logo-container h1 {
+    font-size: 1.5rem;
+    white-space: nowrap;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.user-details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.25rem;
+}
+
+.user-name {
+    font-weight: bold;
+}
+
+.current-branch {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.menu-btn {
+    padding: 0.5rem 1rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid white;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    white-space: nowrap;
+}
+
+.menu-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.dashboard-content {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+}
+
+.branch-info-card{
+    margin-top: 60px;
+}
+
+.branch-info-card,
+.status-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+.branch-info-card h2,
+.status-card h2 {
+    color: #333;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid #ff0000;
+    padding-bottom: 0.5rem;
+}
+
+.branch-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.info-item {
+    flex: 1;
+    min-width: 200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.info-item label {
+    font-weight: bold;
+    color: #666;
+}
+
+.equipment-status {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.unit-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.unit-card {
+    border: 1px solid #eee;
+    border-radius: 6px;
+    padding: 1rem;
+    position: relative;
+    background-color: #f8f8f8;
+}
+
+.unit-card h3 {
+    color: #444;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.status-indicator {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.status-indicator.on {
+    background-color: #4CAF50;
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.5);
+}
+
+.status-indicator.off {
+    background-color: #f44336;
+    box-shadow: 0 0 8px rgba(244, 67, 54, 0.5);
+}
+
+.status-indicator.warning {
+    background-color: #ff9800;
+    box-shadow: 0 0 8px rgba(255, 152, 0, 0.5);
+}
+
+.unit-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.unit-details p {
+    display: flex;
+    justify-content: space-between;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.status-text {
+    font-weight: bold;
+}
+
+.temp {
+    color: #1a73e8;
+    font-weight: bold;
+}
+
+.timestamp {
+    color: #666;
+    font-size: 0.8rem;
+}
+
+.nav-toggle {
+    display: none;
+}
+
+.branch-selector {
+    display: none;
+    background-color: white;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    position: absolute;
+    z-index: 200;
+}
+
+.dashboard-container.nav-open .branch-selector {
+    display: block;
+}
+
+.dashboard-container.nav-open .nav-toggle {
+    left: 320px;
+}
+
+.dashboard-container.nav-open .dashboard-header {
+    left: 300px;
+    width: calc(100% - 300px);
+}
+
+.dashboard-content {
+    margin-left: 0;
+    transition: margin-left 0.3s;
+}
+
+.dashboard-container.nav-open .dashboard-content {
+    margin-left: 300px;
+}
+
+.region-section h2 {
+    color: #333;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #008163;
+}
+
+.region-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.region-item {
+    border: 1px solid #eee;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.region-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: #f8f8f8;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.region-item.active .region-header {
+    background-color: #008163;
+    color: white;
+}
+
+.region-name {
+    font-weight: bold;
+}
+
+.expand-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+}
+
+.region-item.active .expand-btn {
+    transform: rotate(180deg);
+    color: white;
+}
+
+.region-item:not(.active) .expand-btn {
+    color: #666;
+}
+
+.region-item:not(.active) .expand-btn:hover {
+    color: #333;
+}
+
+.branch-list {
+    display: none;
+    background-color: white;
+}
+
+.region-item.active .branch-list {
+    display: block;
+}
+
+.branch-item {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.2s;
+}
+
+.branch-item:last-child {
+    border-bottom: none;
+}
+
+.branch-item:hover {
+    background-color: #f5f5f5;
+}
+
+.branch-item.selected {
+    background-color: #e8f5f1;
+    border-left: 4px solid #008163;
+}
+
+.branch-id {
+    font-size: 0.8rem;
+    color: #666;
+}
+
+@media (max-width: 1024px) {
+    .branch-selector {
+        width: 250px;
+        left: -250px;
+    }
+
+    .dashboard-container.nav-open .branch-selector {
+        transform: translateX(250px);
+    }
+
+    .dashboard-container.nav-open .nav-toggle {
+        left: 270px;
+    }
+
+    .dashboard-container.nav-open .dashboard-header {
+        left: 250px;
+        width: calc(100% - 250px);
+    }
+
+    .dashboard-container.nav-open .dashboard-content {
+        margin-left: 250px;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-toggle {
+        top: 10px;
+        left: 10px;
+        width: 40px;
+        height: 40px;
+    }
+
+    .branch-selector {
+        width: 100%;
+        left: -100%;
+    }
+
+    .dashboard-container.nav-open .branch-selector {
+        transform: translateX(100%);
+    }
+
+    .dashboard-container.nav-open .nav-toggle {
+        left: calc(100% - 50px);
+    }
+
+    .dashboard-container.nav-open .dashboard-header,
+    .dashboard-container.nav-open .dashboard-content {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .branch-details {
+        grid-template-columns: 1fr;
+    }
+
+    .unit-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Modal styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.management-options {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1rem;
+}
+
+.button-group {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.option-btn, .remove-btn, .edit-btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.option-btn {
+    background-color: #008163;
+    color: white;
+}
+
+.remove-btn {
+    background-color: #ff4d4d;
+    color: white;
+}
+
+.edit-btn {
+    background-color: #ffa500;
+    color: white;
+}
+
+.option-btn:hover, .remove-btn:hover, .edit-btn:hover {
+    opacity: 0.8;
+}
+
+.add-unit {
+    background-color: #f0f0f0; /* Light background color */
+    border: 2px dashed #008163; /* Dashed border */
+    border-radius: 8px; /* Rounded corners */
+    padding: 1rem; /* Padding inside the card */
+    text-align: center; /* Center the text */
+    cursor: pointer; /* Change cursor to pointer */
+    transition: background-color 0.3s, transform 0.3s; /* Smooth transition */
+    width: 100%; /* Set width to 100% of the parent container */
+    max-width: 300px; /* Set a maximum width for the button */
+    margin: 1rem auto; /* Center the button with auto margins */
+}
+
+.add-unit:hover {
+    background-color: #e0e0e0; /* Darker background on hover */
+    transform: scale(1.02); /* Slightly enlarge on hover */
+}
+
+.sidebar {
+    width: 250px; /* Set width of the sidebar */
+    background-color: #f8f8f8; /* Background color */
+    padding: 1rem; /* Padding inside the sidebar */
+    position: fixed; /* Fixed position */
+    top: 0; /* Align to the top */
+    left: 0; /* Align to the left */
+    height: 100%; /* Full height */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+    z-index: 100; /* Ensure it is above other content */
+    display: none; /* Initially hidden */
+}
+
+.dashboard-container.nav-open .sidebar {
+    display: block; /* Show sidebar when nav-open class is active */
+}
+
+.dashboard-content {
+    margin-left: 250px; /* Leave space for the sidebar */
+    transition: margin-left 0.3s; /* Smooth transition */
+} 
