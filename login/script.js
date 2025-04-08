@@ -8,7 +8,7 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
     // Simulate a successful login
     if (username === 'admin' && password === 'password123') {
         // If login is successful, redirect to the store manager dashboard
-        window.location.href = '../store_manager_dashb/index.html';
+        window.location.href = '../dashb_branch_manager/dashb_branch.html';
     } else {
         // If login fails, display an error message
         message.textContent = 'Invalid username or password';

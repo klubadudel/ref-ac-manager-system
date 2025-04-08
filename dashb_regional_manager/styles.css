@@ -78,7 +78,7 @@ body {
     opacity: 0.9;
 }
 
-.menu-btn {
+.logout-btn {
     padding: 0.5rem 1rem;
     background-color: rgba(255, 255, 255, 0.1);
     border: 1px solid white;
@@ -89,7 +89,7 @@ body {
     white-space: nowrap;
 }
 
-.menu-btn:hover {
+.logout-btn:hover {
     background-color: rgba(255, 255, 255, 0.2);
 }
 
