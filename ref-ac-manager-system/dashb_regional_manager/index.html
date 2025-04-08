@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7-11 Regional Manager Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Add responsive styles */
+        .dashboard-container {
+            padding: 10px; /* Add padding for mobile */
+        }
+        .unit-card {
+            width: 100%; /* Make unit cards full width */
+            margin-bottom: 10px; /* Space between cards */
+        }
+        .button-group button {
+            width: 100%; /* Make buttons full width */
+            margin: 5px 0; /* Space between buttons */
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <div class="header-content">
+                <div class="logo-container">
+                    <img src="../assets/711-logo.png" alt="7-11 Logo" class="logo">
+                    <h1>Regional Manager Dashboard</h1>
+                </div>
+                <div class="user-info">
+                    <div class="user-details">
+                        <span class="user-name">Welcome, Regional Manager</span>
+                        <span class="current-branch">Metro Manila</span>
+                    </div>
+                    <button class="logout-btn">Logout</button>
+                </div>
+            </div>
+        </header>
+        <aside class="sidebar">
+            <div class="branch-item">Branch 1</div>
+            <div class="branch-item">Branch 2</div>
+            <div class="branch-item">Branch 3</div>
+        </aside>
+        <main class="dashboard-content">
+            <!-- Branch Info Section -->
+<section class="branch-info-card">
+    <h2>Branch Overview - Branch 1</h2>
+    <div class="branch-details">
+        <div class="info-item">
+            <label>Branch ID:</label>
+            <span>BR001</span>
+        </div>
+        <div class="info-item">
+            <label>Location:</label>
+            <span>Quezon City, Metro Manila</span>
+        </div>
+        <div class="info-item">
+            <label>Store Manager:</label>
+            <span>Maria Santos</span>
+        </div>
+        <div class="info-item">
+            <label>Employees:</label>
+            <span>12</span>
+        </div>
+        <div class="info-item">
+            <label>Monthly Revenue:</label>
+            <span>₱450,000</span>
+        </div>
+        <div class="info-item">
+            <label>Last Inspection:</label>
+            <span>March 20, 2025</span>
+        </div>
+    </div>
+</section>
+
+<!-- Equipment Status Section -->
+<section class="status-card">
+    <h2>Equipment Status</h2>
+    <div class="unit-grid">
+        <div class="unit-card">
+            <div class="status-indicator on"></div>
+            <h3>Refrigerator - Unit A1</h3>
+            <div class="unit-details">
+                <p><span>Status:</span><span class="status-text">Running</span></p>
+                <p><span>Temperature:</span><span class="temp">3°C</span></p>
+                <p><span>Last Check:</span><span class="timestamp">04/05/2025 - 08:00 AM</span></p>
+            </div>
+        </div>
+
+        <div class="unit-card">
+            <div class="status-indicator warning"></div>
+            <h3>Freezer - Unit F2</h3>
+            <div class="unit-details">
+                <p><span>Status:</span><span class="status-text">Warning</span></p>
+                <p><span>Temperature:</span><span class="temp">-8°C</span></p>
+                <p><span>Last Check:</span><span class="timestamp">04/05/2025 - 07:50 AM</span></p>
+            </div>
+        </div>
+
+        <div class="unit-card">
+            <div class="status-indicator off"></div>
+            <h3>Microwave - Unit M5</h3>
+            <div class="unit-details">
+                <p><span>Status:</span><span class="status-text">Offline</span></p>
+                <p><span>Temperature:</span><span class="temp">N/A</span></p>
+                <p><span>Last Check:</span><span class="timestamp">04/04/2025 - 06:00 PM</span></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Add Unit Button -->
+<div class="add-unit">
+    + Add New Equipment
+</div>
+        </main>
+    </div>
+</body>
+</html> 
