@@ -1,21 +1,24 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
-import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Firebase Configuration
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-    apiKey: "AIzaSyD6gu4V0uXpaRu5xsTz22FIPTzTgOFpdiM",
-    authDomain: "refrigrator-and-ac-management.firebaseapp.com",
-    databaseURL: "https://refrigrator-and-ac-management-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "refrigrator-and-ac-management",
-    storageBucket: "refrigrator-and-ac-management.firebasestorage.app",
-    messagingSenderId: "1011812537168",
-    appId: "1:1011812537168:web:2a83cd7baefeef911c9255",
-    measurementId: "G-N95LJ1VWBL"
+  apiKey: "AIzaSyBqFSRcvrk74Ekg0qhnygt2RcD6_ODw8kQ",
+  authDomain: "refrigiration-and-ac-manager.firebaseapp.com",
+  projectId: "refrigiration-and-ac-manager",
+  storageBucket: "refrigiration-and-ac-manager.firebasestorage.app",
+  messagingSenderId: "919498706120",
+  appId: "1:919498706120:web:ab0a4a8efe987ca3bb69fd",
+  measurementId: "G-VQJV78HWM7"
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app); // Ensure you have the auth instance
+const analytics = getAnalytics(app);
 
 document.addEventListener('DOMContentLoaded', function() {
     // Function to open the modal and populate data
@@ -69,13 +72,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Add event listener for the logout button
     const logoutButton = document.querySelector('.logout-btn');
-    logoutButton.addEventListener('click', () => {
-        console.log("Logout button clicked"); // Check if the click event is triggered
-        signOut(auth).then(() => {
-            console.log("Sign-out successful"); // Check if sign-out is successful
-            window.location.href = '../login/index.html'; // Redirect to login page
-        }).catch((error) => {
-            console.error("Logout failed:", error); // Log any errors
-        });
-    });
+    logoutButton.addEventListener('click', logout);
 });
+
+function logout() {
+    console.log("Logout button clicked"); // Check if the click event is triggered
+    signOut(auth).then(() => {
+        console.log("Sign-out successful"); // Check if sign-out is successful
+        window.location.href = '../login/index.html'; // Redirect to login page
+    }).catch((error) => {
+        console.error("Logout failed:", error); // Log any errors
+    });
+}

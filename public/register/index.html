@@ -14,6 +14,10 @@
         <form id="registerForm" class="login-form">
             <h2>Register</h2>
             <div class="form-group">
+                <label for="confirmPassword">Authentication Key</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
+            </div>
+            <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username" required>
             </div>
@@ -29,6 +33,22 @@
                 <label for="confirmPassword">Confirm Password</label>
                 <input type="password" id="confirmPassword" name="confirmPassword" required>
             </div>
+            <div class="form-group">
+                <label>User Role</label>
+                <div>
+                    <input type="radio" id="user" name="role" value="user" required>
+                    <label for="user">User</label>
+                </div>
+                <div>
+                    <input type="radio" id="superadmin" name="role" value="superadmin" required>
+                    <label for="superadmin">Superadmin</label>
+                </div>
+                <div>
+                    <input type="radio" id="admin" name="role" value="admin" required>
+                    <label for="admin">Admin</label>
+                </div>
+            </div>
+
             <button type="submit">Register</button>
             <p id="message" class="message"></p>
             <p class="switch-form">
