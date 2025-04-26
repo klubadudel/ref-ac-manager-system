@@ -413,13 +413,18 @@ body {
 }
 
 .branch-item {
-    padding: 0.75rem 1rem;
-    border-bottom: 1px solid #eee;
+    padding: 1rem; /* Increased padding for better spacing */
+    border-radius: 8px; /* Rounded corners for a softer look */
+    border: 1px solid #ddd; /* Subtle border for definition */
     cursor: pointer;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition: background-color 0.2s;
+    transition: background-color 0.3s, transform 0.2s; /* Smooth transition for hover effects */
+    background-color: #ffffff; /* White background for contrast */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    font-family: 'Arial', sans-serif; /* Consistent font family */
+    color: #333; /* Default text color */
 }
 
 .branch-item:last-child {
@@ -427,12 +432,26 @@ body {
 }
 
 .branch-item:hover {
-    background-color: #f5f5f5;
+    background-color: #f0f8ff; /* Light blue background on hover for a fresh look */
+    transform: translateY(-2px); /* Slight lift effect on hover */
 }
 
 .branch-item.selected {
-    background-color: #e8f5f1;
-    border-left: 4px solid #008163;
+    background-color: #e8f5f1; /* Soft green background for selected items */
+    border-left: 4px solid #008163; /* Emphasized left border for selected state */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Enhanced shadow for selected items */
+}
+
+.branch-item a {
+    text-decoration: none; /* Remove underline from links */
+    color: #008163; /* 7-Eleven green for links */
+    font-weight: bold; /* Bold text for emphasis */
+    font-size: 1.1rem; /* Slightly larger font size for better readability */
+    transition: color 0.2s; /* Smooth color transition */
+}
+
+.branch-item a:hover {
+    color: #006f52; /* Darker green on hover for better contrast */
 }
 
 .branch-id {
@@ -506,3 +525,4 @@ body {
     background-color: #f0f0f0;
     cursor: pointer;
 }
+

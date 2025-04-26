@@ -71,6 +71,394 @@ body {
 
 .user-name {
     font-weight: bold;
+    color: #008163; /* 7-Eleven green */
+    font-size: 1.2rem;
+}
+
+.current-branch {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.logout-btn {
+    padding: 0.5rem 1rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid white;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    white-space: nowrap;
+}
+
+.logout-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.sidebar {
+    width: 300px; /* Increased width of the sidebar */
+    background-color: #f8f8f8; /* Background color */
+    padding: 1rem; /* Padding for the sidebar */
+    position: fixed; /* Fix the sidebar to the left */
+    top: 60px; /* Position below the header */
+    left: 0; /* Align to the left */
+    height: calc(100% - 60px); /* Full height minus header */
+    overflow-y: auto; /* Enable scrolling if content overflows */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Stack items vertically */
+    border-radius: 8px; /* Rounded corners for a modern look */
+}
+
+.sidebar h2 {
+    margin-top: 1.5rem;
+    font-size: 1.5rem; /* Increased font size for better readability */
+    margin-bottom: 1rem; /* Space below the header */
+    color: #008163; /* 7-Eleven green for headers */
+    font-weight: bold; /* Bold font for emphasis */
+}
+
+.sidebar ul {
+    list-style-type: none; /* Remove default list styles */
+    padding: 0; /* Remove padding */
+    display: flex; /* Use flexbox for the list */
+    flex-direction: column; /* Stack links vertically */
+}
+
+.sidebar ul li {
+    margin-bottom: 1rem; /* Increased space between links for better spacing */
+    display: flex; /* Use flexbox for each item */
+    justify-content: flex-start; /* Align items to the start */
+}
+
+.sidebar ul li a {
+    text-decoration: none; /* Remove underline from links */
+    color: #008163; /* 7-Eleven green for links */
+    padding: 0.75rem; /* Increased padding for better spacing */
+    display: block; /* Make the link fill the space */
+    border-radius: 8px; /* Increased border radius for a modern look */
+    transition: background-color 0.2s; /* Smooth background transition */
+    flex: 1; /* Allow the link to grow and fill the container */
+    font-size: 1.1rem; /* Increased font size for better readability */
+}
+
+.sidebar ul li a:hover {
+    background-color: #e0f7fa; /* Change background on hover */
+    color: #006f52; /* Darker link color on hover for better contrast */
+}
+
+.dashboard-content {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+}
+
+.info-item {
+    flex: 1;
+    min-width: 200px;
+    display: flex;
+    justify-content: first baseline;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.info-item label {
+    font-weight: bold;
+    color: #666;
+}
+
+.equipment-status {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.unit-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.unit-card {
+    border: 1px solid #eee;
+    border-radius: 6px;
+    padding: 1rem;
+    position: relative;
+    background-color: #f8f8f8;
+}
+
+.unit-card h3 {
+    color: #444;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.status-indicator {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.status-indicator.on {
+    background-color: #4CAF50;
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.5);
+}
+
+.status-indicator.off {
+    background-color: #f44336;
+    box-shadow: 0 0 8px rgba(244, 67, 54, 0.5);
+}
+
+.status-indicator.warning {
+    background-color: #ff9800;
+    box-shadow: 0 0 8px rgba(255, 152, 0, 0.5);
+}
+
+.unit-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.unit-details p {
+    display: flex;
+    justify-content: space-between;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.status-text {
+    font-weight: bold;
+}
+
+.timestamp {
+    color: #666;
+    font-size: 0.8rem;
+}
+
+.dashboard-container.nav-open .branch-selector {
+    transform: translateX(300px);
+}
+
+.dashboard-container.nav-open .nav-toggle {
+    left: 320px;
+}
+
+.dashboard-container.nav-open .dashboard-header {
+    left: 300px;
+    width: calc(100% - 300px);
+}
+
+.dashboard-content {
+    margin-left: 0;
+    transition: margin-left 0.3s;
+}
+
+.dashboard-container.nav-open .dashboard-content {
+    margin-left: 300px;
+}
+
+.expand-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+}
+
+.branch-item {
+    padding: 1rem; /* Increased padding for better spacing */
+    border-radius: 8px; /* Rounded corners for a softer look */
+    border: 1px solid #ddd; /* Subtle border for definition */
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s, transform 0.2s; /* Smooth transition for hover effects */
+    background-color: #ffffff; /* White background for contrast */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    font-family: 'Arial', sans-serif; /* Consistent font family */
+    color: #333; /* Default text color */
+}
+
+.branch-item:last-child {
+    border-bottom: none;
+}
+
+.branch-item:hover {
+    background-color: #f0f8ff; /* Light blue background on hover for a fresh look */
+    transform: translateY(-2px); /* Slight lift effect on hover */
+}
+
+.branch-item.selected {
+    background-color: #e8f5f1; /* Soft green background for selected items */
+    border-left: 4px solid #008163; /* Emphasized left border for selected state */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Enhanced shadow for selected items */
+}
+
+.branch-item a {
+    text-decoration: none; /* Remove underline from links */
+    color: #008163; /* 7-Eleven green for links */
+    font-weight: bold; /* Bold text for emphasis */
+    font-size: 1.1rem; /* Slightly larger font size for better readability */
+    transition: color 0.2s; /* Smooth color transition */
+}
+
+.branch-item a:hover {
+    color: #006f52; /* Darker green on hover for better contrast */
+}
+
+.branch-id {
+    font-size: 0.8rem;
+    color: #666;
+}
+
+@media (max-width: 1024px) {
+    .branch-selector {
+        width: 250px;
+        left: -250px;
+    }
+
+    .dashboard-container.nav-open .branch-selector {
+        transform: translateX(250px);
+    }
+
+    .dashboard-container.nav-open .nav-toggle {
+        left: 270px;
+    }
+
+    .dashboard-container.nav-open .dashboard-header {
+        left: 250px;
+        width: calc(100% - 250px);
+    }
+
+    .dashboard-container.nav-open .dashboard-content {
+        margin-left: 250px;
+    }
+}
+
+.management-options {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1rem;
+}
+
+.button-group {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.detail-btn, .remove-btn, .edit-btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.detail-btn {
+    background-color: #008163;
+    color: white;
+}
+
+.remove-btn {
+    background-color: #ff4d4d;
+    color: white;
+}
+
+.edit-btn {
+    background-color: #ffa500;
+    color: white;
+}
+
+.detail-btn:hover, .remove-btn:hover, .edit-btn:hover {
+    opacity: 0.8;
+}
+
+.button-group button:hover {
+    background-color: #f0f0f0;
+    cursor: pointer;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.dashboard-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboard-header {
+    background-color: #008163;
+    color: white;
+    padding: 1rem 2rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.logo {
+    height: 40px;
+    width: auto;
+}
+
+.logo-container h1 {
+    font-size: 1.5rem;
+    white-space: nowrap;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.user-details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.25rem;
+}
+
+.user-name {
+    font-weight: bold;
 }
 
 .current-branch {
@@ -91,65 +479,6 @@ body {
 
 .logout-btn:hover {
     background-color: rgba(255, 255, 255, 0.2);
-}
-
-.sidebar {
-    width: 250px; /* Set the width of the sidebar */
-    background-color: #f8f8f8; /* Background color */
-    padding: 1rem; /* Padding for the sidebar */
-    position: fixed; /* Fix the sidebar to the left */
-    top: 60px; /* Position below the header */
-    left: 0; /* Align to the left */
-    height: calc(100% - 60px); /* Full height minus header */
-    overflow-y: auto; /* Enable scrolling if content overflows */
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
-    display: flex; /* Use flexbox for layout */
-    flex-direction: column; /* Stack items vertically */
-    border-radius: 8px; /* Rounded corners for a modern look */
-}
-
-.sidebar h2 {
-    margin-top: 1.5rem;
-    font-size: 1.5rem; /* Increased font size for better readability */
-    margin-bottom: 1.5rem; /* Increased space below the heading for better spacing */
-    color: #333; /* Darker color for better contrast */
-    font-weight: bold; /* Bold font for emphasis */
-}
-
-.sidebar ul {
-    list-style-type: none; /* Remove default list styles */
-    padding: 0; /* Remove padding */
-    display: flex; /* Use flexbox for the list */
-    flex-direction: column; /* Stack links vertically */
-}
-
-.sidebar ul li {
-    margin-bottom: 1rem; /* Increased space between links for better spacing */
-    display: flex; /* Use flexbox for each item */
-    justify-content: flex-start; /* Align items to the start */
-}
-
-.sidebar ul li a {
-    text-decoration: none; /* Remove underline from links */
-    color: #000000; /* Link color */
-    padding: 0.75rem; /* Increased padding for better spacing */
-    display: block; /* Make the link fill the space */
-    border-radius: 8px; /* Increased border radius for a modern look */
-    transition: background-color 0.2s; /* Smooth background transition */
-    flex: 1; /* Allow the link to grow and fill the container */
-    font-size: 1.1rem; /* Increased font size for better readability */
-}
-
-.sidebar ul li a:hover {
-    background-color: #e0f7fa; /* Change background on hover */
-    color: #006f52; /* Darker link color on hover for better contrast */
-}
-
-.dashboard-content {
-    display: flex;
-    flex-direction: column;
-    padding: 2rem;
-    margin-left: 250px; /* Adjust margin to accommodate sidebar */
 }
 
 .dashboard-content {
@@ -368,7 +697,7 @@ body {
     gap: 0.5rem;
 }
 
-.detail-btn, .remove-btn, .edit-btn {
+.option-btn, .remove-btn, .edit-btn {
     padding: 0.5rem 1rem;
     border: none;
     border-radius: 4px;
@@ -376,7 +705,7 @@ body {
     transition: background-color 0.3s;
 }
 
-.detail-btn {
+.option-btn {
     background-color: #008163;
     color: white;
 }
@@ -391,9 +720,27 @@ body {
     color: white;
 }
 
-.detail-btn:hover, .remove-btn:hover, .edit-btn:hover {
+.option-btn:hover, .remove-btn:hover, .edit-btn:hover {
     opacity: 0.8;
 }
+
+.add-unit {
+    background-color: #f0f0f0; /* Light background color */
+    border: 2px dashed #008163; /* Dashed border */
+    border-radius: 8px; /* Rounded corners */
+    padding: 1rem; /* Padding inside the card */
+    text-align: center; /* Center the text */
+    cursor: pointer; /* Change cursor to pointer */
+    transition: background-color 0.3s, transform 0.3s; /* Smooth transition */
+    width: 100%; /* Set width to 100% of the parent container */
+    max-width: 300px; /* Set a maximum width for the button */
+    margin: 1rem auto; /* Center the button with auto margins */
+}
+
+.add-unit:hover {
+    background-color: #e0e0e0; /* Darker background on hover */
+    transform: scale(1.02); /* Slightly enlarge on hover */
+} 
 
 .button-group button:hover {
     background-color: #f0f0f0;
