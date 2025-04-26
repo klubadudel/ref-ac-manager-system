@@ -71,13 +71,10 @@ body {
 
 .user-name {
     font-weight: bold;
-    color: #008163; /* 7-Eleven green */
-    font-size: 1.2rem;
 }
 
 .current-branch {
     font-size: 0.9rem;
-    color: #666;
 }
 
 .logout-btn {
