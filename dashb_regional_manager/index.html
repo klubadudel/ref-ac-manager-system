@@ -3,22 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>7-11 Regional Manager Dashboard</title>
+    <title>7-11 Regional Dashboard</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        /* Add responsive styles */
-        .dashboard-container {
-            padding: 10px; /* Add padding for mobile */
-        }
-        .unit-card {
-            width: 100%; /* Make unit cards full width */
-            margin-bottom: 10px; /* Space between cards */
-        }
-        .button-group button {
-            width: 100%; /* Make buttons full width */
-            margin: 5px 0; /* Space between buttons */
-        }
-    </style>
+    <script src="script.js"></script>
 </head>
 <body>
     <div class="dashboard-container">
@@ -31,89 +18,128 @@
                 <div class="user-info">
                     <div class="user-details">
                         <span class="user-name">Welcome, Regional Manager</span>
-                        <span class="current-branch">Metro Manila</span>
+                        <span class="current-branch">7-11 NCR</span>
                     </div>
                     <button class="logout-btn">Logout</button>
                 </div>
             </div>
         </header>
-        <aside class="sidebar">
-            <div class="branch-item">Branch 1</div>
-            <div class="branch-item">Branch 2</div>
-            <div class="branch-item">Branch 3</div>
-        </aside>
+
         <main class="dashboard-content">
-            <!-- Branch Info Section -->
-<section class="branch-info-card">
-    <h2>Branch Overview - Branch 1</h2>
-    <div class="branch-details">
-        <div class="info-item">
-            <label>Branch ID:</label>
-            <span>BR001</span>
-        </div>
-        <div class="info-item">
-            <label>Location:</label>
-            <span>Quezon City, Metro Manila</span>
-        </div>
-        <div class="info-item">
-            <label>Store Manager:</label>
-            <span>Maria Santos</span>
-        </div>
-        <div class="info-item">
-            <label>Employees:</label>
-            <span>12</span>
-        </div>
-        <div class="info-item">
-            <label>Monthly Revenue:</label>
-            <span>₱450,000</span>
-        </div>
-        <div class="info-item">
-            <label>Last Inspection:</label>
-            <span>March 20, 2025</span>
-        </div>
-    </div>
-</section>
-
-<!-- Equipment Status Section -->
-<section class="status-card">
-    <h2>Equipment Status</h2>
-    <div class="unit-grid">
-        <div class="unit-card">
-            <div class="status-indicator on"></div>
-            <h3>Refrigerator - Unit A1</h3>
-            <div class="unit-details">
-                <p><span>Status:</span><span class="status-text">Running</span></p>
-                <p><span>Temperature:</span><span class="temp">3°C</span></p>
-                <p><span>Last Check:</span><span class="timestamp">04/05/2025 - 08:00 AM</span></p>
+            <div class="branch-info-card">
+                <h2>Branch Information</h2>
+                <div class="branch-details">
+                    <div class="info-item">
+                        <label>Branch Name:</label>
+                        <span>7-11 Arlegui</span>
+                    </div>
+                    <div class="info-item">
+                        <label>Branch ID:</label>
+                        <span>DTN-7110123</span>
+                    </div>
+                    <div class="address-layer">
+                        <div class="address-item">
+                            <label>Address:</label>
+                            <span>Arlegui St.</span>
+                        </div>
+                        <div class="address-item">
+                            <label>City:</label>
+                            <span>Quiapo, Manila</span>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <label>Operating Hours:</label>
+                        <span>24/7</span>
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <div class="unit-card">
-            <div class="status-indicator warning"></div>
-            <h3>Freezer - Unit F2</h3>
-            <div class="unit-details">
-                <p><span>Status:</span><span class="status-text">Warning</span></p>
-                <p><span>Temperature:</span><span class="temp">-8°C</span></p>
-                <p><span>Last Check:</span><span class="timestamp">04/05/2025 - 07:50 AM</span></p>
+            <div class="status-card refrigerators">
+                <h2>Refrigerator Units</h2>
+                <div class="unit-grid" id="refrigeratorUnits">
+                    <div class="unit-card">
+                        <h3>Beverage Cooler #1</h3>
+                        <div class="status-indicator on"></div>
+                        <div class="unit-details">
+                            <p>Status: <span class="status-text">ON</span></p>
+                            <p>Last Updated: <span class="timestamp">2024-03-19 14:30</span></p>
+                        </div>
+                        <div class="management-options">
+                            <div class="button-group">
+                                <button class="detail-btn" onclick="openModal('Beverage Cooler #1')">Details</button>
+                                <button class="remove-btn" onclick="removeUnit(this)">Remove</button>
+                                <button class="edit-btn" onclick="editUnit(this)">Edit</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="unit-card">
+                        <h3>Ice Cream Freezer</h3>
+                        <div class="status-indicator on"></div>
+                        <div class="unit-details">
+                            <p>Status: <span class="status-text">ON</span></p>
+                            <p>Last Updated: <span class="timestamp">2024-03-19 14:30</span></p>
+                        </div>
+                        <div class="management-options">
+                            <div class="button-group">
+                                <button class="detail-btn" onclick="openModal('Ice Cream Freezer')">Details</button>
+                                <button class="remove-btn" onclick="removeUnit(this)">Remove</button>
+                                <button class="edit-btn" onclick="editUnit(this)">Edit</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="unit-card">
+                        <h3>Food Display Cooler</h3>
+                        <div class="status-indicator off"></div>
+                        <div class="unit-details">
+                            <p>Status: <span class="status-text">OFF</span></p>
+                            <p>Last Updated: <span class="timestamp">2024-03-19 14:30</span></p>
+                        </div>
+                        <div class="management-options">
+                            <div class="button-group">
+                                <button class="detail-btn" onclick="openModal('Food Display Cooler')">Details</button>
+                                <button class="remove-btn" onclick="removeUnit(this)">Remove</button>
+                                <button class="edit-btn" onclick="editUnit(this)">Edit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <div class="unit-card">
-            <div class="status-indicator off"></div>
-            <h3>Microwave - Unit M5</h3>
-            <div class="unit-details">
-                <p><span>Status:</span><span class="status-text">Offline</span></p>
-                <p><span>Temperature:</span><span class="temp">N/A</span></p>
-                <p><span>Last Check:</span><span class="timestamp">04/04/2025 - 06:00 PM</span></p>
+            <div class="status-card air-conditioning">
+                <h2>Air Conditioning Units</h2>
+                <div class="unit-grid" id="airConditioningUnits">
+                    <div class="unit-card">
+                        <h3>Main Area AC</h3>
+                        <div class="status-indicator on"></div>
+                        <div class="unit-details">
+                            <p>Status: <span class="status-text">ON</span></p>
+                            <p>Last Updated: <span class="timestamp">2024-03-19 14:30</span></p>
+                        </div>
+                        <div class="management-options">
+                            <div class="button-group">
+                                <button class="detail-btn" onclick="openModal('Main Area AC')">Details</button>
+                                <button class="remove-btn" onclick="removeUnit(this)">Remove</button>
+                                <button class="edit-btn" onclick="editUnit(this)">Edit</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="unit-card">
+                        <h3>Storage Room AC</h3>
+                        <div class="status-indicator off"></div>
+                        <div class="unit-details">
+                            <p>Status: <span class="status-text">OFF</span></p>
+                            <p>Last Updated: <span class="timestamp">2024-03-19 14:30</span></p>
+                        </div>
+                        <div class="management-options">
+                            <div class="button-group">
+                                <button class="detail-btn" onclick="openModal('Storage Room AC')">Details</button>
+                                <button class="remove-btn" onclick="removeUnit(this)">Remove</button>
+                                <button class="edit-btn" onclick="editUnit(this)">Edit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-</section>
-
-<!-- Add Unit Button -->
-<div class="add-unit">
-    + Add New Equipment
-</div>
         </main>
     </div>
 </body>

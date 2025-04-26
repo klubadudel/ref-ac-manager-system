@@ -95,4 +95,31 @@ button[type="submit"]:hover {
     margin-bottom: 20px;
     color: #008163;
     font-size: 1.5rem;
+}
+
+@media (max-width: 600px) {
+    .login-container {
+        padding: 1rem;
+        width: 90%;
+    }
+
+    .login-form h2 {
+        font-size: 1.5rem;
+    }
+
+    .form-group input {
+        font-size: 0.9rem;
+    }
+
+    button[type="submit"] {
+        font-size: 0.9rem;
+    }
+
+    .message {
+        font-size: 0.8rem;
+    }
+
+    .switch-form {
+        font-size: 12px;
+    }
 } 

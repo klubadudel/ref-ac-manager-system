@@ -5,20 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>7-11 Manager Dashboard</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        /* Add responsive styles */
-        .dashboard-container {
-            padding: 10px; /* Add padding for mobile */
-        }
-        .unit-card {
-            width: 100%; /* Make unit cards full width */
-            margin-bottom: 10px; /* Space between cards */
-        }
-        .button-group button {
-            width: 100%; /* Make buttons full width */
-            margin: 5px 0; /* Space between buttons */
-        }
-    </style>
+    <script src="script.js"></script>
 </head>
 <body>
     <div class="dashboard-container">
@@ -75,7 +62,6 @@
                         <div class="status-indicator on"></div>
                         <div class="unit-details">
                             <p>Status: <span class="status-text">ON</span></p>
-                            <!-- <p>Temperature: <span class="temp">2.5°C</span></p> -->
                             <p>Last Updated: <span class="timestamp">2024-03-19 14:30</span></p>
                         </div>
                         <div class="management-options">
@@ -91,7 +77,6 @@
                         <div class="status-indicator on"></div>
                         <div class="unit-details">
                             <p>Status: <span class="status-text">ON</span></p>
-                            <!--<p>Temperature: <span class="temp">-18°C</span></p> -->
                             <p>Last Updated: <span class="timestamp">2024-03-19 14:30</span></p>
                         </div>
                         <div class="management-options">
@@ -107,7 +92,6 @@
                         <div class="status-indicator off"></div>
                         <div class="unit-details">
                             <p>Status: <span class="status-text">OFF</span></p>
-                            <!-- <p>Temperature: <span class="temp">8°C</span></p> -->
                             <p>Last Updated: <span class="timestamp">2024-03-19 14:30</span></p>
                         </div>
                         <div class="management-options">
@@ -133,7 +117,6 @@
                         <div class="status-indicator on"></div>
                         <div class="unit-details">
                             <p>Status: <span class="status-text">ON</span></p>
-                            <p>Temperature: <span class="temp">22°C</span></p>
                             <p>Last Updated: <span class="timestamp">2024-03-19 14:30</span></p>
                         </div>
                         <div class="management-options">
@@ -149,7 +132,6 @@
                         <div class="status-indicator off"></div>
                         <div class="unit-details">
                             <p>Status: <span class="status-text">OFF</span></p>
-                            <p>Temperature: <span class="temp">--</span></p>
                             <p>Last Updated: <span class="timestamp">2024-03-19 14:30</span></p>
                         </div>
                         <div class="management-options">
@@ -168,15 +150,5 @@
             </div>
         </main>
     </div>
-    <div id="detailsModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2>Temperature Over Time</h2>
-            <canvas id="temperatureChart"></canvas>
-            <h3>Update Logs</h3>
-            <div id="updateLogs"></div>
-        </div>
-    </div>
-    <script src="script.js"></script>
 </body>
 </html> 
