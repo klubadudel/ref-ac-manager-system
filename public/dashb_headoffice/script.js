@@ -78,4 +78,34 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error("Logout failed:", error); // Log any errors
         });
     });
+
+    // Function to toggle dropdown visibility
+    function toggleDropdown(headerId, listId) {
+        const header = document.getElementById(headerId);
+        const list = document.getElementById(listId);
+
+        header.addEventListener('click', function() {
+            list.style.display = list.style.display === 'block' ? 'none' : 'block';
+        });
+    }
+
+    // Add dropdown functionality for each region
+    toggleDropdown('ncrBranches', 'ncrBranches');
+    toggleDropdown('ilocosRegion', 'ilocosRegion');
+    toggleDropdown('cagayanValley', 'cagayanValley');
+    toggleDropdown('centralLuzon', 'centralLuzon');
+    toggleDropdown('calabarzon', 'calabarzon');
+    toggleDropdown('mimaropa', 'mimaropa');
+    toggleDropdown('bicolRegion', 'bicolRegion');
+    toggleDropdown('westernVisayas', 'westernVisayas');
+    toggleDropdown('centralVisayas', 'centralVisayas');
+    toggleDropdown('easternVisayas', 'easternVisayas');
+    toggleDropdown('zamboangaPeninsula', 'zamboangaPeninsula');
+    toggleDropdown('northernMindanao', 'northernMindanao');
+    toggleDropdown('davaoRegion', 'davaoRegion');
+    toggleDropdown('soccsksargen', 'soccsksargen');
+    toggleDropdown('caraga', 'caraga');
+    toggleDropdown('armm', 'armm');
+    toggleDropdown('ncr', 'ncr');
+    toggleDropdown('car', 'car');
 });

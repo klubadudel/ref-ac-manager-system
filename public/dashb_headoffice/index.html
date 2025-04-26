@@ -6,6 +6,7 @@
     <title>7-11 Head Office Dashboard</title>
     <link rel="stylesheet" href="styles.css">
     <script src="script.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="dashboard-container">
@@ -21,9 +22,139 @@
                         <span class="current-branch">7-11 Philippines</span>
                     </div>
                     <button class="logout-btn">Logout</button>
+                    <div class="dropdown">
+                        <button class="toggle-dropdown-btn">☰</button>
+                        <ul class="dropdown-menu" id="dropdownMenu">
+                          <li><a href="#">Regions</a></li>
+                          <li><a href="#">Logout</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </header>
+
+        <div class="sidebar">
+            <div class="search-container">
+                <input type="text" id="searchBar" placeholder="Search branches..." class="search-bar">
+                <button id="searchButton" class="search-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a5.5 5.5 0 1 0-1.397 1.397l3.646 3.646a1 1 0 0 0 1.415-1.415l-3.646-3.646zM5.5 10a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9z"/>
+                    </svg>
+                </button>
+            </div>
+            <h2 class="dropdown-header">NCR Branches</h2>
+            <ul class="dropdown-list" id="ncrBranches">
+                <li><a href="../dashb_branch_manager/index.html">1481 Legarda-Arlegui</a></li>
+                <li><a href="../dashb_branch_manager/index.html">1278 ETON Greenbelt Parkview</a></li>
+                <li><a href="../dashb_branch_manager/index.html">2841 Global Enterprise</a></li>
+                <li><a href="../dashb_branch_manager/index.html">513 One Solaris</a></li>
+                <li><a href="../dashb_branch_manager/index.html">510 LKG</a></li>
+                <li><a href="../dashb_branch_manager/index.html">498 SM Cyber One</a></li>
+                <li><a href="../dashb_branch_manager/index.html">167 Jupiter</a></li>
+                <li><a href="../dashb_branch_manager/index.html">1945 One Corporate Plaza</a></li>
+                <li><a href="../dashb_branch_manager/index.html">558 Welding Bldg.</a></li>
+                <li><a href="../dashb_branch_manager/index.html">466 Sterling Centre</a></li>
+                <li><a href="../dashb_branch_manager/index.html">251 Nobel</a></li>
+                <li><a href="../dashb_branch_manager/index.html">2841 Global Enterprise</a></li>
+                <li><a href="../dashb_branch_manager/index.html">804 Amorsolo</a></li>
+            </ul>
+            <h2 class="dropdown-header">Region 1: Ilocos Region</h2>
+            <ul class="dropdown-list" id="ilocosRegion">
+                <li><a href="../dashb_branch_manager/index.html">Branch 1</a></li>
+                <li><a href="../dashb_branch_manager/index.html">Branch 2</a></li>
+                <li><a href="../dashb_branch_manager/index.html">Branch 3</a></li>
+            </ul>
+            <h2 class="dropdown-header">Region II: Cagayan Valley</h2>
+            <ul class="dropdown-list" id="cagayanValley">
+                <li><a href="../dashb_branch_manager/index.html">Branch 1</a></li>
+                <li><a href="../dashb_branch_manager/index.html">Branch 2</a></li>
+                <li><a href="../dashb_branch_manager/index.html">Branch 3</a></li>
+            </ul>
+            <h2 class="dropdown-header">Region III: Central Luzon</h2>
+            <ul class="dropdown-list" id="centralLuzon">
+                <li><a href="../dashb_branch_manager/index.html">Branch 1</a></li>
+                <li><a href="../dashb_branch_manager/index.html">Branch 2</a></li>
+                <li><a href="../dashb_branch_manager/index.html">Branch 3</a></li>
+            </ul>
+            <h2 class="dropdown-header">Region IV-A: CALABARZON</h2>
+            <ul class="dropdown-list" id="calabarzon">
+                <li><a href="../dashb_branch_manager/index.html">Branch 1</a></li>
+                <li><a href="../dashb_branch_manager/index.html">Branch 2</a></li>
+                <li><a href="../dashb_branch_manager/index.html">Branch 3</a></li>
+            </ul>
+            <h2 class="dropdown-header">Region IV-B: MIMAROPA</h2>
+            <ul class="dropdown-list" id="mimaropa">
+                <li><a href="../dashb_branch_manager/index.html">Branch 1</a></li>
+                <li><a href="../dashb_branch_manager/index.html">Branch 2</a></li>
+                <li><a href="../dashb_branch_manager/index.html">Branch 3</a></li>
+            </ul>
+            <h2 class="dropdown-header">Region V: Bicol Region</h2>
+            <ul class="dropdown-list" id="bicolRegion">
+                <li><a href="../dashb_branch_manager/index.html">Branch 1</a></li>
+                <li><a href="../dashb_branch_manager/index.html">Branch 2</a></li>
+                <li><a href="../dashb_branch_manager/index.html">Branch 3</a></li>
+            </ul>
+            <h2 class="dropdown-header">Region VI: Western Visayas</h2>
+            <ul class="dropdown-list" id="westernVisayas">
+                <li><a href="../dashb_branch_manager/index.html">Branch 1</a></li>
+                <li><a href="../dashb_branch_manager/index.html">Branch 2</a></li>
+                <li><a href="../dashb_branch_manager/index.html">Branch 3</a></li>
+            </ul>
+            <h2 class="dropdown-header">Region VII: Central Visayas</h2>
+            <ul class="dropdown-list" id="centralVisayas">
+                <li><a href="../dashb_branch_manager/index.html">Branch 1</a></li>
+                <li><a href="../dashb_branch_manager/index.html">Branch 2</a></li>
+                <li><a href="../dashb_branch_manager/index.html">Branch 3</a></li>
+            </ul>
+            <h2 class="dropdown-header">Region VIII: Eastern Visayas</h2>
+            <ul class="dropdown-list" id="easternVisayas">
+                <li><a href="../dashb_branch_manager/index.html">Branch 1</a></li>
+                <li><a href="../dashb_branch_manager/index.html">Branch 2</a></li>
+                <li><a href="../dashb_branch_manager/index.html">Branch 3</a></li>
+            </ul>
+            <h2 class="dropdown-header">Region IX: Zamboanga Peninsula</h2>
+            <ul class="dropdown-list" id="zamboangaPeninsula">
+                <li><a href="../dashb_branch_manager/index.html">Branch 1</a></li>
+                <li><a href="../dashb_branch_manager/index.html">Branch 2</a></li>
+                <li><a href="../dashb_branch_manager/index.html">Branch 3</a></li>
+            </ul>
+            <h2 class="dropdown-header">Region X: Northern Mindanao</h2>
+            <ul class="dropdown-list" id="northernMindanao">
+                <li><a href="../dashb_branch_manager/index.html">Branch 1</a></li>
+                <li><a href="../dashb_branch_manager/index.html">Branch 2</a></li>
+                <li><a href="../dashb_branch_manager/index.html">Branch 3</a></li>
+            </ul>
+            <h2 class="dropdown-header">Region XI: Davao Region</h2>
+            <ul class="dropdown-list" id="davaoRegion">
+                <li><a href="../dashb_branch_manager/index.html">Branch 1</a></li>
+                <li><a href="../dashb_branch_manager/index.html">Branch 2</a></li>
+                <li><a href="../dashb_branch_manager/index.html">Branch 3</a></li>
+            </ul>
+            <h2 class="dropdown-header">Region XII: SOCCSKSARGEN</h2>
+            <ul class="dropdown-list" id="soccsksargen">
+                <li><a href="../dashb_branch_manager/index.html">Branch 1</a></li>
+                <li><a href="../dashb_branch_manager/index.html">Branch 2</a></li>
+                <li><a href="../dashb_branch_manager/index.html">Branch 3</a></li>
+            </ul>
+            <h2 class="dropdown-header">Region XIII: Caraga</h2>
+            <ul class="dropdown-list" id="caraga">
+                <li><a href="../dashb_branch_manager/index.html">Branch 1</a></li>
+                <li><a href="../dashb_branch_manager/index.html">Branch 2</a></li>
+                <li><a href="../dashb_branch_manager/index.html">Branch 3</a></li>
+            </ul>
+            <h2 class="dropdown-header">ARMM: Autonomous Region in Muslim Mindanao</h2>
+            <ul class="dropdown-list" id="armm">
+                <li><a href="../dashb_branch_manager/index.html">Branch 1</a></li>
+                <li><a href="../dashb_branch_manager/index.html">Branch 2</a></li>
+                <li><a href="../dashb_branch_manager/index.html">Branch 3</a></li>
+            </ul>
+            <h2 class="dropdown-header">CAR: Cordillera Administrative Region</h2>
+            <ul class="dropdown-list" id="car">
+                <li><a href="../dashb_branch_manager/index.html">Branch 1</a></li>
+                <li><a href="../dashb_branch_manager/index.html">Branch 2</a></li>
+                <li><a href="../dashb_branch_manager/index.html">Branch 3</a></li>
+            </ul>
+        </div>
 
         <main class="dashboard-content">
             <div class="branch-info-card">
@@ -31,25 +162,25 @@
                 <div class="branch-details">
                     <div class="info-item">
                         <label>Branch Name:</label>
-                        <span>7-11 Arlegui</span>
+                        <span>1481 Legarda-Arlegui</span>
                     </div>
                     <div class="info-item">
                         <label>Branch ID:</label>
                         <span>DTN-7110123</span>
                     </div>
-                    <div class="address-layer">
-                        <div class="address-item">
-                            <label>Address:</label>
-                            <span>Arlegui St.</span>
-                        </div>
-                        <div class="address-item">
-                            <label>City:</label>
-                            <span>Quiapo, Manila</span>
-                        </div>
-                    </div>
                     <div class="info-item">
                         <label>Operating Hours:</label>
                         <span>24/7</span>
+                    </div>
+                    <div class="address-layer">
+                        <div class="info-item">
+                            <label>Address:</label>
+                            <span>504 Nepomucemo St. Formerly Tanduay St. cor. Arlegui St.</span>
+                        </div>
+                        <div class="info-item">
+                            <label>City:</label>
+                            <span>CITY OF MANILA Metro Manila</span>
+                        </div>
                     </div>
                 </div>
             </div>

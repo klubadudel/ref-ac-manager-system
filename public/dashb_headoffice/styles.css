@@ -78,6 +78,21 @@ body {
     opacity: 0.9;
 }
 
+.toggle-sidebar-btn {
+    padding: 0.5rem 1rem; /* Padding for the button */
+    background-color: #008163; /* Background color */
+    color: white; /* Text color */
+    border: none; /* Remove border */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth background transition */
+    font-size: 1.2rem; /* Font size */
+}
+
+.toggle-sidebar-btn:hover {
+    background-color: #006f52; /* Darker shade on hover */
+}
+
 .logout-btn {
     padding: 0.5rem 1rem;
     background-color: rgba(255, 255, 255, 0.1);
@@ -91,6 +106,157 @@ body {
 
 .logout-btn:hover {
     background-color: rgba(255, 255, 255, 0.2);
+}
+
+.sidebar {
+    width: 250px; /* Set the width of the sidebar */
+    background-color: #f8f8f8; /* Background color */
+    padding: 1rem; /* Padding for the sidebar */
+    position: fixed; /* Fix the sidebar to the left */
+    top: 60px; /* Position below the header */
+    left: 0; /* Align to the left */
+    height: calc(100% - 60px); /* Full height minus header */
+    overflow-y: auto; /* Enable scrolling if content overflows */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Stack items vertically */
+    border-radius: 8px; /* Rounded corners for a modern look */
+}
+
+.sidebar h2 {
+    margin-top: 1.5rem;
+    font-size: 1.5rem; /* Increased font size for better readability */
+    margin-bottom: 1.5rem; /* Increased space below the heading for better spacing */
+    color: #333; /* Darker color for better contrast */
+    font-weight: bold; /* Bold font for emphasis */
+}
+
+.sidebar ul {
+    list-style-type: none; /* Remove default list styles */
+    padding: 0; /* Remove padding */
+    display: flex; /* Use flexbox for the list */
+    flex-direction: column; /* Stack links vertically */
+}
+
+.sidebar ul li {
+    margin-bottom: 1rem; /* Increased space between links for better spacing */
+    display: flex; /* Use flexbox for each item */
+    justify-content: flex-start; /* Align items to the start */
+}
+
+.sidebar ul li a {
+    text-decoration: none; /* Remove underline from links */
+    color: #000000; /* Link color */
+    padding: 0.75rem; /* Increased padding for better spacing */
+    display: block; /* Make the link fill the space */
+    border-radius: 8px; /* Increased border radius for a modern look */
+    transition: background-color 0.2s; /* Smooth background transition */
+    flex: 1; /* Allow the link to grow and fill the container */
+    font-size: 1.1rem; /* Increased font size for better readability */
+}
+
+.sidebar ul li a:hover {
+    background-color: #e0f7fa; /* Change background on hover */
+    color: #006f52; /* Darker link color on hover for better contrast */
+}
+
+.sidebar {
+    background-color: #f9f9f9; /* Light background color */
+    border-right: 1px solid #ddd; /* Subtle border on the right */
+    padding: 1rem; /* Padding around the sidebar */
+    width: 250px; /* Fixed width for the sidebar */
+    height: 100vh; /* Full height */
+    overflow-y: auto; /* Scroll if content overflows */
+}
+
+/* Search bar styles */
+.search-bar {
+    width: 100%; /* Full width */
+    padding: 0.5rem; /* Padding for the input */
+    margin-top: 1.5rem;
+    margin-bottom: 1rem; /* Space below the input */
+    border: 1px solid #ccc; /* Border styling */
+    border-radius: 4px; /* Rounded corners */
+    font-size: 1rem; /* Font size */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.search-container {
+    display: flex; /* Use flexbox for alignment */
+}
+
+.search-button {
+    width: 40px; /* Set a fixed width */
+    height: 35px; /* Set a fixed height to make it square */
+    margin-left: 5px;
+    margin-top: 1.5rem;
+    padding: 0; /* Remove padding */
+    border: none; /* Remove border */   
+    border-radius: 4px; /* Rounded corners */
+    background-color: #008163; /* Green background */
+    color: white; /* White text */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth background transition */
+    display: flex; /* Use flexbox for alignment */
+    align-items: center; /* Center icon vertically */
+    justify-content: center; /* Center icon horizontally */
+}
+
+/* Change background on hover */
+.search-button:hover {
+    background-color: #006f52; /* Darker shade on hover */
+}
+
+.dropdown {
+  position: relative;
+}
+
+.toggle-dropdown-btn {
+  padding: 0.5rem 1rem;
+  background-color: #008163;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.toggle-dropdown-btn:hover {
+  background-color: #006f52;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  list-style: none;
+  padding: 0.5rem 0;
+  margin-top: 0.5rem;
+  display: none;
+  min-width: 150px;
+  z-index: 999;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-menu li {
+  padding: 0.5rem 1rem;
+}
+
+.dropdown-menu li a {
+  text-decoration: none;
+  color: #333;
+  display: block;
+}
+
+.dropdown-menu li:hover {
+  background-color: #f0f0f0;
+}
+
+.dropdown-menu.show {
+  display: block;
 }
 
 .dashboard-content {
@@ -131,7 +297,7 @@ body {
     flex: 1;
     min-width: 200px;
     display: flex;
-    justify-content: space-between;
+    justify-content: first baseline;
     align-items: center;
     margin-bottom: 1rem;
 }

@@ -131,7 +131,7 @@ body {
     flex: 1;
     min-width: 200px;
     display: flex;
-    justify-content: space-between;
+    justify-content: first baseline;
     align-items: center;
     margin-bottom: 1rem;
 }

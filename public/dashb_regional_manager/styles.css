@@ -93,6 +93,65 @@ body {
     background-color: rgba(255, 255, 255, 0.2);
 }
 
+.sidebar {
+    width: 250px; /* Set the width of the sidebar */
+    background-color: #f8f8f8; /* Background color */
+    padding: 1rem; /* Padding for the sidebar */
+    position: fixed; /* Fix the sidebar to the left */
+    top: 60px; /* Position below the header */
+    left: 0; /* Align to the left */
+    height: calc(100% - 60px); /* Full height minus header */
+    overflow-y: auto; /* Enable scrolling if content overflows */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Stack items vertically */
+    border-radius: 8px; /* Rounded corners for a modern look */
+}
+
+.sidebar h2 {
+    margin-top: 1.5rem;
+    font-size: 1.5rem; /* Increased font size for better readability */
+    margin-bottom: 1.5rem; /* Increased space below the heading for better spacing */
+    color: #333; /* Darker color for better contrast */
+    font-weight: bold; /* Bold font for emphasis */
+}
+
+.sidebar ul {
+    list-style-type: none; /* Remove default list styles */
+    padding: 0; /* Remove padding */
+    display: flex; /* Use flexbox for the list */
+    flex-direction: column; /* Stack links vertically */
+}
+
+.sidebar ul li {
+    margin-bottom: 1rem; /* Increased space between links for better spacing */
+    display: flex; /* Use flexbox for each item */
+    justify-content: flex-start; /* Align items to the start */
+}
+
+.sidebar ul li a {
+    text-decoration: none; /* Remove underline from links */
+    color: #000000; /* Link color */
+    padding: 0.75rem; /* Increased padding for better spacing */
+    display: block; /* Make the link fill the space */
+    border-radius: 8px; /* Increased border radius for a modern look */
+    transition: background-color 0.2s; /* Smooth background transition */
+    flex: 1; /* Allow the link to grow and fill the container */
+    font-size: 1.1rem; /* Increased font size for better readability */
+}
+
+.sidebar ul li a:hover {
+    background-color: #e0f7fa; /* Change background on hover */
+    color: #006f52; /* Darker link color on hover for better contrast */
+}
+
+.dashboard-content {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    margin-left: 250px; /* Adjust margin to accommodate sidebar */
+}
+
 .dashboard-content {
     display: flex;
     flex-direction: column;
@@ -131,7 +190,7 @@ body {
     flex: 1;
     min-width: 200px;
     display: flex;
-    justify-content: space-between;
+    justify-content: first baseline;
     align-items: center;
     margin-bottom: 1rem;
 }
