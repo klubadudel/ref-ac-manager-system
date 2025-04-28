@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>7-11 Manager Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="dashboard-container">
+    <!-- HEADER -->
+    <header class="dashboard-header">
+      <div class="header-content">
+        <div class="logo-container">
+          <img src="../assets/711-logo.png" alt="7-11 Logo" class="logo">
+          <h1>Branch Manager Dashboard</h1>
+        </div>
+        <div class="user-info">
+          <div class="user-details">
+            <span class="user-name">Welcome, Branch Manager</span>
+            <span class="current-branch">7-11 Arlegui</span>
+          </div>
+          <button class="logout-btn" onclick="window.location.href='../login/index.html'">Logout</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="dashboard-content">
+      <!-- Branch Info -->
+      <div class="branch-info-card">
+        <h2>Branch Information</h2>
+        <div class="branch-details">
+          <div class="info-item"><label>Branch Name:</label><span>1481 Legarda-Arlegui</span></div>
+          <div class="info-item"><label>Branch ID:</label><span>DTN-7110123</span></div>
+          <div class="info-item"><label>Operating Hours:</label><span>24/7</span></div>
+          <div class="address-layer">
+            <div class="info-item"><label>Address:</label><span>504 Nepomucemo St. Formerly Tanduay St. cor. Arlegui St.</span></div>
+            <div class="info-item"><label>City:</label><span>CITY OF MANILA</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Refrigerator Units -->
+      <div class="status-card refrigerators">
+        <h2>Refrigerator Units</h2>
+        <div class="unit-grid" id="refrigeratorUnits">
+          <!-- Example Unit -->
+          <div class="unit-card">
+            <h3>Beverage Cooler #1</h3>
+            <div class="status-indicator on"></div>
+            <div class="unit-details">
+              <p>Status: <span class="status-text">ON</span></p>
+              <p>Last Updated: <span class="timestamp">2024-03-19 14:30</span></p>
+            </div>
+            <div class="management-options">
+              <div class="button-group">
+                <button class="option-btn" onclick="openModal('Beverage Cooler #1')">Details</button>
+                <button class="remove-btn" onclick="removeUnit(this)">Remove</button>
+                <button class="edit-btn" onclick="editUnit(this)">Edit</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Add Refrigerator Button -->
+          <div class="unit-card add-unit" onclick="showAddUnitModal('Refrigerator')">
+            <h3>Add New Refrigerator Unit</h3>
+            <p>Click here to add a new refrigerator unit.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Air Conditioning Units -->
+      <div class="status-card air-conditioning">
+        <h2>Air Conditioning Units</h2>
+        <div class="unit-grid" id="airConditioningUnits">
+          <!-- Example Unit -->
+          <div class="unit-card">
+            <h3>Main Area AC</h3>
+            <div class="status-indicator on"></div>
+            <div class="unit-details">
+              <p>Status: <span class="status-text">ON</span></p>
+              <p>Last Updated: <span class="timestamp">2024-03-19 14:30</span></p>
+            </div>
+            <div class="management-options">
+              <div class="button-group">
+                <button class="option-btn" onclick="openModal('Main Area AC')">Details</button>
+                <button class="remove-btn" onclick="removeUnit(this)">Remove</button>
+                <button class="edit-btn" onclick="editUnit(this)">Edit</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Add AC Button -->
+          <div class="unit-card add-unit" onclick="showAddUnitModal('AC')">
+            <h3>Add New AC Unit</h3>
+            <p>Click here to add a new air conditioning unit.</p>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Firebase SDKs -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-analytics.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBqFSRcvrk74Ekg0qhnygt2RcD6_ODw8kQ",
+      authDomain: "refrigiration-and-ac-manager.firebaseapp.com",
+      projectId: "refrigiration-and-ac-manager",
+      storageBucket: "refrigiration-and-ac-manager.appspot.com",
+      messagingSenderId: "919498706120",
+      appId: "1:919498706120:web:ab0a4a8efe987ca3bb69fd",
+      measurementId: "G-VQJV78HWM7"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+  </script>
+
+  <!-- Your Main Script -->
+  <script type="module" src="script.js"></script>
+
+</body>
+</html>
