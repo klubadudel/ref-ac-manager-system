@@ -77,7 +77,7 @@ body {
     font-size: 0.9rem;
 }
 
-.logoutButton {
+.logoutButton, .createButton, .createBranchButton  {
     padding: 0.5rem 1rem;
     background-color: rgba(255, 255, 255, 0.1);
     border: 1px solid white;
@@ -88,7 +88,7 @@ body {
     white-space: nowrap;
 }
 
-.logoutButton:hover {
+.logoutButton, .createButton, .createBranchButton:hover {
     background-color: rgba(255, 255, 255, 0.2);
 }
 
@@ -727,4 +727,94 @@ body {
 .button-group button:hover {
     background-color: #f0f0f0;
     cursor: pointer;
+}
+
+/* Registration Form Styles */
+.create-user-container, .create-branch-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #f5f5f5;
+    padding-top: 100px; /* space for fixed header */
+}
+
+.create-user-form, .create-branch-container {
+    background: #fff;
+    padding: 2.5rem 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08), 0 1.5px 4px rgba(0,0,0,0.04);
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.create-user-form, .create-branch-container h2 {
+    text-align: center;
+    color: #008163;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.form-group label {
+    color: #333;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group select {
+    padding: 0.75rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    background: #fafafa;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #008163;
+    box-shadow: 0 0 0 2px rgba(0,129,99,0.12);
+}
+
+.create-user-form, .create-branch-container button[type="submit"] {
+    margin-top: 0.5rem;
+    padding: 0.85rem;
+    background: linear-gradient(90deg, #008163 60%, #00b894 100%);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,129,99,0.08);
+    transition: background 0.2s, box-shadow 0.2s;
+}
+
+.create-user-form, .create-branch-container button[type="submit"]:hover {
+    background: linear-gradient(90deg, #006f52 60%, #00b894 100%);
+    box-shadow: 0 4px 16px rgba(0,129,99,0.12);
+}
+
+@media (max-width: 600px) {
+    .create-user-form {
+        padding: 1.5rem 0.5rem;
+        max-width: 98vw;
+    }
+    .create-user-container {
+        padding-top: 80px;
+    }
 }
