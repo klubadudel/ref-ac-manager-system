@@ -113,6 +113,14 @@
                     </div>
                 </div>
             </div>
+            <div class="management-options">
+              <div class="button-group">
+                <button class="option-btn" onclick="openModal('Beverage Cooler #1')">Details</button>
+                <button class="remove-btn" onclick="removeUnit(this)">Remove</button>
+                <button class="edit-btn" onclick="editUnit(this)">Edit</button>
+              </div>
+            </div>
+          </div>
 
             <div class="status-card air-conditioning">
                 <h2>Air Conditioning Units</h2>
@@ -149,7 +157,47 @@
                     </div>
                 </div>
             </div>
-        </main>
-    </div>
+            <div class="management-options">
+              <div class="button-group">
+                <button class="option-btn" onclick="openModal('Main Area AC')">Details</button>
+                <button class="remove-btn" onclick="removeUnit(this)">Remove</button>
+                <button class="edit-btn" onclick="editUnit(this)">Edit</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Add AC Button -->
+          <div class="unit-card add-unit" onclick="showAddUnitModal('AC')">
+            <h3>Add New AC Unit</h3>
+            <p>Click here to add a new air conditioning unit.</p>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Firebase SDKs -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-analytics.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBqFSRcvrk74Ekg0qhnygt2RcD6_ODw8kQ",
+      authDomain: "refrigiration-and-ac-manager.firebaseapp.com",
+      projectId: "refrigiration-and-ac-manager",
+      storageBucket: "refrigiration-and-ac-manager.appspot.com",
+      messagingSenderId: "919498706120",
+      appId: "1:919498706120:web:ab0a4a8efe987ca3bb69fd",
+      measurementId: "G-VQJV78HWM7"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+  </script>
+
+  <!-- Your Main Script -->
+  <script type="module" src="script.js"></script>
+
 </body>
-</html> 
+</html>

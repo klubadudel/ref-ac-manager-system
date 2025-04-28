@@ -26,130 +26,164 @@
             </div>
         </header>
 
-        <main class="dashboard-content">
-            <div class="branch-info-card">
-                <h2>Branch Information</h2>
-                <div class="branch-details">
-                    <div class="info-item">
-                        <label>Branch Name:</label>
-                        <span>1481 Legarda-Arlegui</span>
-                    </div>
-                    <div class="info-item">
-                        <label>Branch ID:</label>
-                        <span>DTN-7110123</span>
-                    </div>
-                    <div class="info-item">
-                        <label>Operating Hours:</label>
-                        <span>24/7</span>
-                    </div>
-                    <div class="address-layer">
-                        <div class="info-item">
-                            <label>Address:</label>
-                            <span>504 Nepomucemo St. Formerly Tanduay St. cor. Arlegui St.</span>
-                        </div>
-                        <div class="info-item">
-                            <label>City:</label>
-                            <span>CITY OF MANILA</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <!-- Firebase SDKs (modular only) -->
+  <script type="module">
+    // Import the necessary Firebase functions
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+    import { getDatabase, ref, set, update, remove, child, get } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-database.js";
 
-            <div class="status-card refrigerators">
-                <h2>Refrigerator Units</h2>
-                <div class="unit-grid" id="refrigeratorUnits">
-                    <div class="unit-card">
-                        <h3>Beverage Cooler #1</h3>
-                        <div class="status-indicator on"></div>
-                        <div class="unit-details">
-                            <p>Status: <span class="status-text">ON</span></p>
-                            <p>Last Updated: <span class="timestamp">2024-03-19 14:30</span></p>
-                        </div>
-                        <div class="management-options">
-                            <div class="button-group">
-                                <button class="option-btn" onclick="openModal('Beverage Cooler #1')">Logs</button>
-                                <button class="remove-btn" onclick="removeUnit(this)">Remove</button>
-                                <button class="edit-btn" onclick="editUnit(this)">Edit</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="unit-card">
-                        <h3>Ice Cream Freezer</h3>
-                        <div class="status-indicator on"></div>
-                        <div class="unit-details">
-                            <p>Status: <span class="status-text">ON</span></p>
-                            <p>Last Updated: <span class="timestamp">2024-03-19 14:30</span></p>
-                        </div>
-                        <div class="management-options">
-                            <div class="button-group">
-                                <button class="option-btn" onclick="openModal('Ice Cream Freezer')">Logs</button>
-                                <button class="remove-btn" onclick="removeUnit(this)">Remove</button>
-                                <button class="edit-btn" onclick="editUnit(this)">Edit</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="unit-card">
-                        <h3>Food Display Cooler</h3>
-                        <div class="status-indicator off"></div>
-                        <div class="unit-details">
-                            <p>Status: <span class="status-text">OFF</span></p>
-                            <p>Last Updated: <span class="timestamp">2024-03-19 14:30</span></p>
-                        </div>
-                        <div class="management-options">
-                            <div class="button-group">
-                                <button class="option-btn" onclick="openModal('Food Display Cooler')">Logs</button>
-                                <button class="remove-btn" onclick="removeUnit(this)">Remove</button>
-                                <button class="edit-btn" onclick="editUnit(this)">Edit</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="unit-card add-unit" onclick="showAddUnitModal('Refrigerator')">
-                        <h3>Add New Refrigerator Unit</h3>
-                        <p>Click here to add a new refrigerator unit.</p>
-                    </div>
-                </div>
-            </div>
+    const firebaseConfig = {
+      apiKey: "AIzaSyBqFSRcvrk74Ekg0qhnygt2RcD6_ODw8kQ",
+      authDomain: "refrigiration-and-ac-manager.firebaseapp.com",
+      projectId: "refrigiration-and-ac-manager",
+      storageBucket: "refrigiration-and-ac-manager.appspot.com",
+      messagingSenderId: "919498706120",
+      appId: "1:919498706120:web:ab0a4a8efe987ca3bb69fd",
+      measurementId: "G-VQJV78HWM7"
+    };
 
-            <div class="status-card air-conditioning">
-                <h2>Air Conditioning Units</h2>
-                <div class="unit-grid" id="airConditioningUnits">
-                    <div class="unit-card">
-                        <h3>Main Area AC</h3>
-                        <div class="status-indicator on"></div>
-                        <div class="unit-details">
-                            <p>Status: <span class="status-text">ON</span></p>
-                            <p>Last Updated: <span class="timestamp">2024-03-19 14:30</span></p>
-                        </div>
-                        <div class="management-options">
-                            <div class="button-group">
-                                <button class="option-btn" onclick="openModal('Main Area AC')">Logs</button>
-                                <button class="remove-btn" onclick="removeUnit(this)">Remove</button>
-                                <button class="edit-btn" onclick="editUnit(this)">Edit</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="unit-card">
-                        <h3>Storage Room AC</h3>
-                        <div class="status-indicator off"></div>
-                        <div class="unit-details">
-                            <p>Status: <span class="status-text">OFF</span></p>
-                            <p>Last Updated: <span class="timestamp">2024-03-19 14:30</span></p>
-                        </div>
-                        <div class="management-options">
-                            <div class="button-group">
-                                <button class="option-btn" onclick="openModal('Storage Room AC')">Details</button>
-                                <button class="remove-btn" onclick="removeUnit(this)">Remove</button>
-                                <button class="edit-btn" onclick="editUnit(this)">Edit</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="unit-card add-unit" onclick="showAddUnitModal('AC')">
-                        <h3>Add New AC Unit</h3>
-                        <p>Click here to add a new air conditioning unit.</p>
-                    </div>
-                </div>
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+
+    // Toast function
+    function showToast(message, type = 'info', duration = 3000) {
+      const toast = document.createElement('div');
+      toast.className = `toast ${type}`;
+      toast.innerText = message;
+      document.body.appendChild(toast);
+
+      setTimeout(() => {
+        toast.remove();
+      }, duration);
+    }
+
+    // Firebase functions
+    function saveUnit(unitId, unitData) {
+      const unitRef = ref(database, 'units/' + unitId);
+      set(unitRef, unitData);
+    }
+
+    function updateUnit(unitId, unitData) {
+      const unitRef = ref(database, 'units/' + unitId);
+      update(unitRef, { details: unitData });
+    }
+
+    function deleteUnit(unitId) {
+      const unitRef = ref(database, 'units/' + unitId);
+      remove(unitRef);
+    }
+
+    // Dummy handlers for buttons
+    window.openModal = function (unitId) {
+      showToast(`Opening details for ${unitId}`, 'info');
+    };
+
+    window.removeUnit = function (unitId) {
+      if (confirm('Are you sure you want to remove this unit?')) {
+        deleteUnit(unitId);
+        showToast('Unit removed successfully', 'success');
+      }
+    };
+
+    window.editUnit = function (unitId) {
+      let newDetails = prompt("Enter new details for the unit:");
+      if (newDetails) {
+        updateUnit(unitId, newDetails);
+        showToast('Unit updated successfully', 'success');
+      }
+    };
+
+    window.showAddUnitModal = function (type) {
+      let unitName = prompt(`Enter new ${type} unit name:`);
+      let unitStatus = prompt('Enter status for the unit:');
+      let unitData = {
+        name: unitName,
+        status: unitStatus,
+        timestamp: new Date().toISOString()
+      };
+      if (unitName && unitStatus) {
+        saveUnit(unitName, unitData);
+        showToast(`${type} unit added successfully`, 'success');
+      }
+    };
+  </script>
+
+  <div class="dashboard-container">
+    <header class="dashboard-header">
+      <div class="header-content">
+        <div class="logo-container">
+          <img src="../assets/711-logo.png" alt="7-11 Logo" class="logo">
+          <h1>Branch Manager Dashboard</h1>
+        </div>
+        <div class="user-info">
+          <div class="user-details">
+            <span class="user-name">Welcome, Branch Manager</span>
+            <span class="current-branch">7-11 Arlegui</span>
+          </div>
+          <button class="logout-btn" onclick="window.location.href='../login/index.html'">Logout</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="dashboard-content">
+      <!-- Branch Info -->
+      <div class="branch-info-card">
+        <h2>Branch Information</h2>
+        <div class="branch-details">
+          <div class="info-item">
+            <label>Branch Name:</label>
+            <span>1481 Legarda-Arlegui</span>
+          </div>
+          <div class="info-item">
+            <label>Branch ID:</label>
+            <span>DTN-7110123</span>
+          </div>
+          <div class="info-item">
+            <label>Operating Hours:</label>
+            <span>24/7</span>
+          </div>
+          <div class="address-layer">
+            <div class="info-item">
+              <label>Address:</label>
+              <span>504 Nepomucemo St. Formerly Tanduay St. cor. Arlegui St.</span>
             </div>
-        </main>
-    </div>
+            <div class="info-item">
+              <label>City:</label>
+              <span>CITY OF MANILA</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Refrigerators -->
+      <div class="status-card refrigerators">
+        <h2>Refrigerator Units</h2>
+        <div class="unit-grid" id="refrigeratorUnits">
+          <div class="unit-card" id="unit1">
+            <h3>Beverage Cooler #1</h3>
+            <div class="status-indicator on"></div>
+            <div class="unit-details">
+              <p>Status: <span class="status-text">ON</span></p>
+              <p>Last Updated: <span class="timestamp">2024-03-19 14:30</span></p>
+            </div>
+            <div class="management-options">
+              <div class="button-group">
+                <button class="option-btn" onclick="openModal('unit1')">Details</button>
+                <button class="remove-btn" onclick="removeUnit('unit1')">Remove</button>
+                <button class="edit-btn" onclick="editUnit('unit1')">Edit</button>
+              </div>
+            </div>
+          </div>
+          <div class="unit-card add-unit" onclick="showAddUnitModal('Refrigerator')">
+            <h3>Add New Refrigerator Unit</h3>
+            <p>Click here to add a new refrigerator unit.</p>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Your own JS -->
+  <script src="script.js"></script>
 </body>
-</html> 
+</html>
