@@ -77,7 +77,7 @@ body {
     font-size: 0.9rem;
 }
 
-.logout-btn {
+.logoutButton {
     padding: 0.5rem 1rem;
     background-color: rgba(255, 255, 255, 0.1);
     border: 1px solid white;
@@ -88,7 +88,7 @@ body {
     white-space: nowrap;
 }
 
-.logout-btn:hover {
+.logoutButton:hover {
     background-color: rgba(255, 255, 255, 0.2);
 }
 
@@ -461,21 +461,6 @@ body {
 .current-branch {
     font-size: 0.9rem;
     opacity: 0.9;
-}
-
-.logout-btn {
-    padding: 0.5rem 1rem;
-    background-color: rgba(255, 255, 255, 0.1);
-    border: 1px solid white;
-    color: white;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-    white-space: nowrap;
-}
-
-.logout-btn:hover {
-    background-color: rgba(255, 255, 255, 0.2);
 }
 
 .dashboard-content {

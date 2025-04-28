@@ -5,16 +5,28 @@
   },
   "hosting": {
     "public": "public",
+    "rewrites": [
+      {
+        "source": "/login/**",
+        "destination": "/login/index.html"
+      },
+      {
+        "source": "/dashboards/branch",
+        "destination": "/dashboards/branch.html"
+      },
+      {
+        "source": "/dashboards/head_office",
+        "destination": "/dashboards/head_office.html"
+      },
+      {
+        "source": "/dashboards/regional",
+        "destination": "/dashboards/regional.html"
+      }
+    ],
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
-    ],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
     ]
   }
 }

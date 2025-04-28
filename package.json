@@ -1,0 +1,25 @@
+{
+  "name": "ref-ac-manager-system",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/klubadudel/ref-ac-manager-system.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/klubadudel/ref-ac-manager-system/issues"
+  },
+  "homepage": "https://github.com/klubadudel/ref-ac-manager-system#readme",
+  "dependencies": {
+    "firebase": "^11.6.1",
+    "vite": "^6.3.3"
+  }
+}

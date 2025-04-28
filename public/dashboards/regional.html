@@ -4,15 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>7-11 Regional Dashboard</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="script.js"></script>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <script type="module" src="../assets/js/dashboard.js"></script>
+    <script type="module" src="../assets/js/firebase_config.js"></script>
 </head>
 <body>
     <div class="dashboard-container">
         <header class="dashboard-header">
             <div class="header-content">
                 <div class="logo-container">
-                    <img src="../assets/711-logo.png" alt="7-11 Logo" class="logo">
+                    <img src="../assets/images/711-logo.png" alt="7-11 Logo" class="logo">
                     <h1>Regional Manager Dashboard</h1>
                 </div>
                 <div class="user-info">
@@ -20,7 +21,7 @@
                         <span class="user-name">Welcome, Regional Manager</span>
                         <span class="current-branch">7-11 NCR</span>
                     </div>
-                    <button class="logout-btn" onclick="window.location.href='../login/index.html'">Logout</button>
+                    <button class="logoutButton" id="logoutButton">Logout</button>
                 </div>
             </div>
         </header>
