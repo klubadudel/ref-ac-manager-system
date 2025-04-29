@@ -28,8 +28,8 @@ This is a web-based dashboard for managing 7-11 branches, including user creatio
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/YOUR-REPO-NAME.git
-cd YOUR-REPO-NAME
+git clone https://github.com/klubadudel/ref-ac-manager-system.git
+cd ref-ac-manager-system
 ```
 
 ### Install Dependencies
