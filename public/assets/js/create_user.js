@@ -16,7 +16,10 @@ document.addEventListener('DOMContentLoaded', function() {
   async function fetchBranches() {
     try {
         const branchesSnapshot = await getDocs(collection(db, "branches"));
-        const branches = branchesSnapshot.docs.map(doc => doc.data());
+        const branches = branchesSnapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data()
+          }));
         
         // Clear the existing options first (in case of repeated fetches)
         userBranchSelect.innerHTML = '';
@@ -30,8 +33,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // Populate the dropdown with branches
         branches.forEach(branch => {
             const option = document.createElement("option");
-            option.value = branch.id;  // Use branch id or name (depending on your collection structure)
-            option.textContent = branch.name; // Assuming the branch object has a 'name' field
+            option.value = branch.id;  // Keep using branch document ID as value
+            option.textContent = branch.branchName; // <-- Correct field from Firestore
             userBranchSelect.appendChild(option);
         });
     } catch (error) {
@@ -39,8 +42,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 }
 
-  
-  
   // Show/hide permissions and branch based on user role
   roleSelect.addEventListener('change', (e) => {
     const role = e.target.value;
@@ -63,7 +64,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const email = document.getElementById('newUserEmail').value;
     const password = document.getElementById('newUserPassword').value;
     const role = document.getElementById('userRole').value;
-    const permissions = document.getElementById('permissions').value;
+    const permissionCheckboxes = document.querySelectorAll('#permissionsContainer input[type="checkbox"]');
+    const permissions = Array.from(permissionCheckboxes)
+        .filter(checkbox => checkbox.checked)
+        .map(checkbox => checkbox.value);
     const branchId = document.getElementById('userBranch') ? document.getElementById('userBranch').value : null;
 
     try {
@@ -77,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
         email: email,
         role: role,
         permissions: permissions,
-        branchId: branchId,  // Store branchId as a reference
+        branches: branchId,  // Store branchId as a reference
         createdAt: new Date()
       });
 

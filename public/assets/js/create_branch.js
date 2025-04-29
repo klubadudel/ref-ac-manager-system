@@ -21,7 +21,7 @@ const db = getFirestore(app);
 // Function to fetch and display the current user's full name and check if they are HQ
 async function fetchUserName(user) {
   try {
-    const userDocRef = doc(db, "users", user.uid);
+    const userDocRef = doc(db, "users", user.uid);  // Fetch the user's document from Firestore
     const userDoc = await getDoc(userDocRef);
 
     if (userDoc.exists()) {
@@ -29,26 +29,19 @@ async function fetchUserName(user) {
       const fullName = userData.fullName;
       const role = userData.role;
 
-      // Update the user's name on the page if the element exists
-      const userNameElement = document.querySelector(".user-name");
-      if (userNameElement) {
-        userNameElement.textContent = `Welcome, ${fullName}`;
-      }
+      // Display the user's full name in the HTML
+      document.querySelector(".user-name").textContent = `Welcome, ${fullName}`;
 
-      // Safely check for the create buttons
+      // Show/hide buttons based on the role (only HQ can create new users and branches)
       const createButton = document.getElementById('createButton');
       const createBranchButton = document.getElementById('createBranchButton');
 
-      if (createButton && createBranchButton) {
-        if (role === "head_office") {
-          createButton.style.display = "inline-block";
-          createBranchButton.style.display = "inline-block";
-        } else {
-          createButton.style.display = "none";
-          createBranchButton.style.display = "none";
-        }
+      if (role === "head_office") {
+        createButton.style.display = "inline-block";
+        createBranchButton.style.display = "inline-block";
       } else {
-        console.error("Create buttons not found in DOM.");
+        createButton.style.display = "none";
+        createBranchButton.style.display = "none";
       }
     } else {
       console.log("No user data found in Firestore.");
@@ -64,22 +57,16 @@ async function fetchUsers() {
     const usersSnapshot = await getDocs(collection(db, "users"));
     const userSelect = document.getElementById("users-container");
 
-    if (!userSelect) {
-      console.error("User select container not found.");
-      return;
-    }
-
-    usersSnapshot.forEach(docSnap => {
-      const userData = docSnap.data();
+    usersSnapshot.forEach(doc => {
+      const userData = doc.data();
       const option = document.createElement("option");
-      option.value = docSnap.id; // User UID
+      option.value = doc.id;  // Use the document ID as user ID
       option.textContent = userData.fullName;
-      option.setAttribute("data-role", userData.role);
+      option.setAttribute("data-role", userData.role);  // Add user role as an attribute
       userSelect.appendChild(option);
     });
   } catch (error) {
     console.error("Error fetching users:", error);
-    alert("Error fetching users. Please check your permissions.");
   }
 }
 
@@ -87,61 +74,51 @@ async function fetchUsers() {
 async function createBranch(event) {
   event.preventDefault();
 
-  const addressInput = document.getElementById("address");  // <-- fixed this
-  const branchNameInput = document.getElementById("branchName");
-  const regionInput = document.getElementById("region");
+  const address = document.getElementById("branchAddress").value;
+  const branchName = document.getElementById("branchName").value;
+  const region = document.getElementById("region").value;
+
+  // Gather selected users from the dropdown
   const userSelect = document.getElementById("users-container");
-  
-  if (!addressInput || !branchNameInput || !regionInput || !userSelect) {
-      console.error("Form fields missing.");
-      return;
-  }
-
-  const address = addressInput.value.trim();
-  const branchName = branchNameInput.value.trim();
-  const region = regionInput.value.trim();
-
   const selectedUsers = Array.from(userSelect.selectedOptions).map(option => ({
     userId: option.value,
-    role: option.getAttribute('data-role')
+    role: option.getAttribute('data-role')  // Correct attribute for user role
   }));
 
   try {
+    // Generate a new branch document in Firestore
     const branchRef = doc(collection(db, "branches"));
-
+    
     await setDoc(branchRef, {
       address: address,
       branchName: branchName,
       region: region,
-      users: selectedUsers,
+      users: selectedUsers,  // Array of user assignments
       createdAt: new Date()
     });
 
     console.log("Branch created successfully!");
     alert("Branch created successfully!");
+    createBranchForm.reset();
 
-    // Optionally, reset form here
-    addressInput.value = "";
-    branchNameInput.value = "";
-    regionInput.value = "";
-    userSelect.selectedIndex = -1;
   } catch (error) {
     console.error("Error creating branch:", error);
     alert("Error creating branch: " + error.message);
   }
 }
 
-// Logout functionality + setup after DOM loaded
+// Logout functionality
 document.addEventListener('DOMContentLoaded', () => {
-  const logoutButton = document.getElementById('logoutButton');
-  const createBranchButton = document.getElementById('createBranchButton');
+  const logoutButton = document.getElementById('logoutButton');  // Get the logout button
 
+  // Listen for authentication state changes
   onAuthStateChanged(auth, (user) => {
     if (user) {
+      // If user is logged in, fetch user data
       fetchUserName(user);
-      fetchUsers();
     } else {
       console.log("No user is logged in.");
+      // Optionally, redirect to login if no user is logged in
       window.location.href = "../login/index.html";
     }
   });
@@ -149,21 +126,26 @@ document.addEventListener('DOMContentLoaded', () => {
   if (logoutButton) {
     logoutButton.addEventListener('click', async () => {
       try {
-        await signOut(auth);
-        console.log("User logged out successfully");
-        window.location.href = "../login/index.html";
+        const user = auth.currentUser;
+        if (user) {
+          console.log("User is signed in, logging out...");
+          await signOut(auth);
+          console.log("User logged out successfully");
+          window.location.href = "../login/index.html";
+        }
       } catch (error) {
         console.error("Error logging out:", error);
         alert("Error logging out: " + error.message);
       }
     });
-  } else {
-    console.error("Logout button not found.");
   }
 
+  // Event listener for create branch form
+  const createBranchButton = document.getElementById('createBranchButton');
   if (createBranchButton) {
     createBranchButton.addEventListener('click', createBranch);
-  } else {
-    console.error("Create Branch button not found.");
   }
+
+  // Fetch users and populate the user select dropdown
+  fetchUsers();
 });

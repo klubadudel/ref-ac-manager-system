@@ -729,7 +729,6 @@ body {
     cursor: pointer;
 }
 
-/* Registration Form Styles */
 .create-user-container, .create-branch-container {
     min-height: 100vh;
     display: flex;
@@ -740,7 +739,7 @@ body {
     padding-top: 100px; /* space for fixed header */
 }
 
-.create-user-form, .create-branch-container {
+.create-user-form, .create-branch-form {
     background: #fff;
     padding: 2.5rem 2rem;
     border-radius: 12px;
@@ -752,7 +751,16 @@ body {
     gap: 1.2rem;
 }
 
-.create-user-form, .create-branch-container h2 {
+.create-user-form h2 {
+    text-align: center;
+    color: #008163;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+.create-branch-form h2 {
     text-align: center;
     color: #008163;
     margin-bottom: 1.5rem;
@@ -790,10 +798,9 @@ body {
     box-shadow: 0 0 0 2px rgba(0,129,99,0.12);
 }
 
-.create-user-form, .create-branch-container button[type="submit"] {
+.create-user-form button[type="submit"] {
     margin-top: 0.5rem;
     padding: 0.85rem;
-    background: linear-gradient(90deg, #008163 60%, #00b894 100%);
     color: #fff;
     border: none;
     border-radius: 6px;
@@ -804,17 +811,148 @@ body {
     transition: background 0.2s, box-shadow 0.2s;
 }
 
-.create-user-form, .create-branch-container button[type="submit"]:hover {
+.create-branch-form button[type="submit"] {
+    margin-top: 0.5rem;
+    padding: 0.85rem;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,129,99,0.08);
+    transition: background 0.2s, box-shadow 0.2s;
+}
+
+.create-user-form button[type="submit"]:hover {
+    background: linear-gradient(90deg, #006f52 60%, #00b894 100%);
+    box-shadow: 0 4px 16px rgba(0,129,99,0.12);
+}
+
+.create-branch-form button[type="submit"]:hover {
     background: linear-gradient(90deg, #006f52 60%, #00b894 100%);
     box-shadow: 0 4px 16px rgba(0,129,99,0.12);
 }
 
 @media (max-width: 600px) {
-    .create-user-form {
+    .create-user-form, .create-branch-form {
         padding: 1.5rem 0.5rem;
         max-width: 98vw;
     }
-    .create-user-container {
+    .create-user-container, .create-branch-container {
         padding-top: 80px;
     }
+}
+
+/* Basic modal styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7); /* Darker background for contrast */
+    transition: opacity 0.3s ease; /* Smooth transition for opacity */
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 30px; /* Increased padding for a spacious feel */
+    border-radius: 12px; /* Rounded corners for a softer look */
+    width: 400px;
+    max-width: 90%;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    animation: slideIn 0.3s ease; /* Animation for modal appearance */
+}
+
+/* Animation for modal appearance */
+@keyframes slideIn {
+    from {
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Form Styles */
+#editDeviceForm {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* Space between form elements */
+}
+
+label {
+    font-weight: bold;
+    color: #333; /* Dark text for labels */
+}
+
+input[type="text"],
+select {
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    background: #fafafa;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input[type="text"]:focus,
+select:focus {
+    outline: none;
+    border-color: #008163; /* Highlight border on focus */
+    box-shadow: 0 0 0 2px rgba(0, 129, 99, 0.12);
+}
+
+/* Close Button Styles */
+.close {
+    font-size: 1.5rem;
+    color: #aaa;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.close:hover {
+    color: #333;
+}
+
+/* Button Styles */
+button[type="submit"],
+button[type="button"],
+.action-btn {
+    padding: 0.75rem;
+    background: linear-gradient(90deg, #008163 60%, #00b894 100%);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s;
+}
+
+button[type="submit"]:hover,
+button[type="button"]:hover,
+.action-btn:hover {
+    background: linear-gradient(90deg, #006f52 60%, #00b894 100%);
+    box-shadow: 0 4px 16px rgba(0, 129, 99, 0.12);
+}
+
+/* Modal action buttons (Yes/No) alignment */
+#removeConfirmationButtons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+/* Form Buttons - Save Changes */
+button[type="submit"].action-btn {
+    width: 100%; /* Makes Save Changes button wider */
 }

@@ -20,7 +20,6 @@
                 <div class="user-info">
                     <div class="user-details">
                         <span class="user-name">Welcome</span>
-                        <span class="current-branch">7-11 Philippines</span>
                     </div>
                     <button class="createButton" id="createButton" onclick="window.location.href='../register/create_user.html'">Create User</button>
                     <button class="createBranchButton" id="createbBranchButton" onclick="window.location.href='../register/create_branch.html'">Create Branch</button>
@@ -137,123 +136,6 @@
                 <div class="branch-item"><a href="../dashb_branch_manager/index.html">Branch 3</a></div>
             </div>
         </div>
-
-        <main class="dashboard-content">
-            <div class="branch-info-card">
-                <h2>Branch Information</h2>
-                <div class="branch-details">
-                    <div class="info-item">
-                        <label>Branch Name:</label>
-                        <span>1481 Legarda-Arlegui</span>
-                    </div>
-                    <div class="info-item">
-                        <label>Branch ID:</label>
-                        <span>DTN-7110123</span>
-                    </div>
-                    <div class="info-item">
-                        <label>Operating Hours:</label>
-                        <span>24/7</span>
-                    </div>
-                    <div class="address-layer">
-                        <div class="info-item">
-                            <label>Address:</label>
-                            <span>504 Nepomucemo St. Formerly Tanduay St. cor. Arlegui St.</span>
-                        </div>
-                        <div class="info-item">
-                            <label>City:</label>
-                            <span>CITY OF MANILA Metro Manila</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="status-card refrigerators">
-                <h2>Refrigerator Units</h2>
-                <div class="unit-grid" id="refrigeratorUnits">
-                    <div class="unit-card">
-                        <h3>Beverage Cooler #1</h3>
-                        <div class="status-indicator on"></div>
-                        <div class="unit-details">
-                            <p>Status: <span class="status-text">ON</span></p>
-                            <p>Last Updated: <span class="timestamp">2024-03-19 14:30</span></p>
-                        </div>
-                        <div class="management-options">
-                            <div class="button-group">
-                                <button class="detail-btn" onclick="openModal('Beverage Cooler #1')">Details</button>
-                                <button class="remove-btn" onclick="removeUnit(this)">Remove</button>
-                                <button class="edit-btn" onclick="editUnit(this)">Edit</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="unit-card">
-                        <h3>Ice Cream Freezer</h3>
-                        <div class="status-indicator on"></div>
-                        <div class="unit-details">
-                            <p>Status: <span class="status-text">ON</span></p>
-                            <p>Last Updated: <span class="timestamp">2024-03-19 14:30</span></p>
-                        </div>
-                        <div class="management-options">
-                            <div class="button-group">
-                                <button class="detail-btn" onclick="openModal('Ice Cream Freezer')">Details</button>
-                                <button class="remove-btn" onclick="removeUnit(this)">Remove</button>
-                                <button class="edit-btn" onclick="editUnit(this)">Edit</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="unit-card">
-                        <h3>Food Display Cooler</h3>
-                        <div class="status-indicator off"></div>
-                        <div class="unit-details">
-                            <p>Status: <span class="status-text">OFF</span></p>
-                            <p>Last Updated: <span class="timestamp">2024-03-19 14:30</span></p>
-                        </div>
-                        <div class="management-options">
-                            <div class="button-group">
-                                <button class="detail-btn" onclick="openModal('Food Display Cooler')">Details</button>
-                                <button class="remove-btn" onclick="removeUnit(this)">Remove</button>
-                                <button class="edit-btn" onclick="editUnit(this)">Edit</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="status-card air-conditioning">
-                <h2>Air Conditioning Units</h2>
-                <div class="unit-grid" id="airConditioningUnits">
-                    <div class="unit-card">
-                        <h3>Main Area AC</h3>
-                        <div class="status-indicator on"></div>
-                        <div class="unit-details">
-                            <p>Status: <span class="status-text">ON</span></p>
-                            <p>Last Updated: <span class="timestamp">2024-03-19 14:30</span></p>
-                        </div>
-                        <div class="management-options">
-                            <div class="button-group">
-                                <button class="detail-btn" onclick="openModal('Main Area AC')">Details</button>
-                                <button class="remove-btn" onclick="removeUnit(this)">Remove</button>
-                                <button class="edit-btn" onclick="editUnit(this)">Edit</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="unit-card">
-                        <h3>Storage Room AC</h3>
-                        <div class="status-indicator off"></div>
-                        <div class="unit-details">
-                            <p>Status: <span class="status-text">OFF</span></p>
-                            <p>Last Updated: <span class="timestamp">2024-03-19 14:30</span></p>
-                        </div>
-                        <div class="management-options">
-                            <div class="button-group">
-                                <button class="detail-btn" onclick="openModal('Storage Room AC')">Details</button>
-                                <button class="remove-btn" onclick="removeUnit(this)">Remove</button>
-                                <button class="edit-btn" onclick="editUnit(this)">Edit</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
     </div>
 </body>
 </html> 

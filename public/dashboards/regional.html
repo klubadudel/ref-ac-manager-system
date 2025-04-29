@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>7-11 Regional Dashboard</title>
     <link rel="stylesheet" href="../assets/css/styles.css">
-    <script type="module" src="../assets/js/dashboard.js"></script>
-    <script type="module" src="../assets/js/firebase_config.js"></script>
+    <script type="module" src="../assets/js/dashboard.js" defer></script>
+    <script type="module" src="../assets/js/firebase_config.js" defer></script>
 </head>
 <body>
     <div class="dashboard-container">
@@ -19,8 +19,9 @@
                 <div class="user-info">
                     <div class="user-details">
                         <span class="user-name">Welcome</span>
-                        <span class="current-branch">7-11 NCR</span>
                     </div>
+                    <button class="createButton" id="createButton" onclick="window.location.href='../register/create_user.html'">Create User</button>
+                    <button class="createBranchButton" id="createBranchButton" onclick="window.location.href='../register/create_branch.html'">Create Branch</button>
                     <button class="logoutButton" id="logoutButton">Logout</button>
                 </div>
             </div>
