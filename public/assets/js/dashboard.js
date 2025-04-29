@@ -1,6 +1,6 @@
 import { initializeApp, getApps, getApp } from 'https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js';
 import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
-import { getFirestore, doc, getDoc, setDoc, collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+import { getFirestore, doc, getDoc, setDoc, collection, deleteDoc, updateDoc, serverTimestamp, getDocs, query, where } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
 
 // Firebase configuration
 const firebaseConfig = {
@@ -35,7 +35,11 @@ function createDeviceCard(deviceData) {
   statusPara.innerHTML = `Status: <span class="status-text">${deviceData.status || "--"}</span>`;
 
   const timestampPara = document.createElement('p');
-  timestampPara.innerHTML = `Last Updated: <span class="timestamp">${deviceData.lastUpdated?.toDate().toLocaleString() || "--"}</span>`;
+  let formattedTimestamp = "--";
+  if (deviceData.lastUpdated && typeof deviceData.lastUpdated.toDate === "function") {
+    formattedTimestamp = deviceData.lastUpdated.toDate().toLocaleString();
+  }
+  timestampPara.innerHTML = `Last Updated: <span class="timestamp">${formattedTimestamp}</span>`;
 
   unitDetails.appendChild(statusPara);
   unitDetails.appendChild(timestampPara);
@@ -136,155 +140,249 @@ async function fetchUserInfo(user) {
 // Fetch and display devices based on device IDs
 async function displayDevices(deviceIds) {
     try {
-      const refrigeratorUnitsContainer = document.getElementById('refrigeratorUnits');
-      const airConditioningUnitsContainer = document.getElementById('airConditioningUnits');
-  
-      // Clear existing units first
-      refrigeratorUnitsContainer.innerHTML = '';
-      airConditioningUnitsContainer.innerHTML = '';
-  
-      for (const deviceIdOrRef of deviceIds) {
-        let deviceId;
-  
-        // If deviceIdOrRef is a Firestore reference, extract its ID
-        if (typeof deviceIdOrRef === 'object' && deviceIdOrRef.id) {
-          deviceId = deviceIdOrRef.id;
-        } else if (typeof deviceIdOrRef === 'string') {
-          deviceId = deviceIdOrRef;
-        } else {
-          console.warn("Unknown device format:", deviceIdOrRef);
-          continue;
+        const refrigeratorUnitsContainer = document.getElementById('refrigeratorUnits');
+        const airConditioningUnitsContainer = document.getElementById('airConditioningUnits');
+
+        // Clear existing units first
+        refrigeratorUnitsContainer.innerHTML = '';
+        airConditioningUnitsContainer.innerHTML = '';
+
+        for (const deviceIdOrRef of deviceIds) {
+            let deviceId;
+
+            // If deviceIdOrRef is a Firestore reference, extract its ID
+            if (typeof deviceIdOrRef === 'object' && deviceIdOrRef.id) {
+                deviceId = deviceIdOrRef.id;
+            } else if (typeof deviceIdOrRef === 'string') {
+                deviceId = deviceIdOrRef;
+            } else {
+                console.warn("Unknown device format:", deviceIdOrRef);
+                continue;
+            }
+
+            const deviceDocRef = doc(db, "devices", deviceId);
+            const deviceDoc = await getDoc(deviceDocRef);
+
+            if (deviceDoc.exists()) {
+                const deviceData = deviceDoc.data();
+                deviceData.id = deviceId;
+                const deviceCard = createDeviceCard(deviceData);
+
+                // Add data-id attribute to the device card
+                deviceCard.setAttribute('data-id', deviceId);
+
+                // Sort device into the correct container
+                if (deviceData.type === "Refrigerator") {
+                    refrigeratorUnitsContainer.appendChild(deviceCard);
+                } else if (deviceData.type === "AC Unit") {
+                    airConditioningUnitsContainer.appendChild(deviceCard);
+                } else {
+                    console.warn("Unknown device type:", deviceData.type);
+                }
+            }
         }
-  
-        const deviceDocRef = doc(db, "devices", deviceId);
-        const deviceDoc = await getDoc(deviceDocRef);
-  
-        if (deviceDoc.exists()) {
-          const deviceData = deviceDoc.data();
-          const deviceCard = createDeviceCard(deviceData);
-  
-          // Sort device into the correct container
-          if (deviceData.type === "Refrigerator") {
-            refrigeratorUnitsContainer.appendChild(deviceCard);
-          } else if (deviceData.type === "AC Unit") {
-            airConditioningUnitsContainer.appendChild(deviceCard);
-          } else {
-            console.warn("Unknown device type:", deviceData.type);
-          }
-        }
-      }
     } catch (error) {
-      console.error("Error displaying devices:", error);
+        console.error("Error displaying devices:", error);
     }
-  }
-  document.addEventListener('DOMContentLoaded', () => {
+}
+
+document.addEventListener('DOMContentLoaded', () => {
     const logoutButton = document.getElementById('logoutButton');
-  
+
     // Get modal elements
     const logsModal = document.getElementById('logsModal');
     const removeModal = document.getElementById('removeModal');
     const editModal = document.getElementById('editModal');
     const addDeviceModal = document.getElementById('addDeviceModal');
-  
-    // Get the button elements in each device card
-    const logsButtons = document.querySelectorAll('.unit-card .option-btn');
-    const removeButtons = document.querySelectorAll('.unit-card .remove-btn');
-    const editButtons = document.querySelectorAll('.unit-card .edit-btn');
-  
-    // Get the close elements for modals
-    const closeLogsModal = document.getElementById('closeLogsModal');
-    const closeRemoveModal = document.getElementById('closeRemoveModal');
-    const closeEditModal = document.getElementById('closeEditModal');
-    const closeAddDeviceModalBtn = document.getElementById('closeModalBtn');
-  
+
     // Add event listeners for device card buttons (logs, remove, edit)
-    logsButtons.forEach((button, index) => {
-      button.addEventListener('click', () => {
-        openLogsModal(index); // Pass device index
-      });
+    document.addEventListener('click', (e) => {
+        // Logs button
+        if (e.target.matches('.unit-card .option-btn')) {
+            const deviceCard = e.target.closest('.unit-card');
+            const deviceId = deviceCard ? deviceCard.getAttribute('data-id') : null;
+            console.log('Logs button clicked for device:', deviceId);
+            openLogsModal(deviceId);
+        }
+
+        // Remove button
+        if (e.target.matches('.unit-card .remove-btn')) {
+            const deviceCard = e.target.closest('.unit-card');
+            const deviceId = deviceCard ? deviceCard.getAttribute('data-id') : null;
+            console.log('Remove button clicked for device:', deviceId);
+            openRemoveModal(deviceId);
+        }
+
+        // Edit button
+        if (e.target.matches('.unit-card .edit-btn')) {
+            const deviceCard = e.target.closest('.unit-card');
+            const deviceId = deviceCard ? deviceCard.getAttribute('data-id') : null;
+            console.log('Edit button clicked for device:', deviceId);
+            openEditModal(deviceId);
+        }
     });
-  
-    removeButtons.forEach((button, index) => {
-      button.addEventListener('click', () => {
-        openRemoveModal(index); // Pass device index
-      });
-    });
-  
-    editButtons.forEach((button, index) => {
-      button.addEventListener('click', () => {
-        openEditModal(index); // Pass device index
-      });
-    });
-  
+
     // Modal open functions
-    function openLogsModal(index) {
-      document.getElementById('logsContent').innerHTML = `Logs for device ${index + 1} will be here.`;
-      logsModal.style.display = 'block';
+    function openLogsModal(deviceId) {
+        document.getElementById('logsContent').innerHTML = `Logs for device ${deviceId} will be here.`;
+        logsModal.style.display = 'block';
     }
-  
-    function openRemoveModal(index) {
-      document.getElementById('confirmRemove').onclick = () => {
-        removeDevice(index); // Call remove device function
-      };
-      removeModal.style.display = 'block';
+
+    function openRemoveModal(deviceId) {
+        if (!deviceId) {
+            console.error("Device ID is missing.");
+            return;
+        }
+
+        const confirmBtn = document.getElementById('confirmRemove');
+        const cancelBtn = document.getElementById('cancelRemove');
+
+        confirmBtn.onclick = async () => {
+            await removeDevice(deviceId);
+            removeModal.style.display = 'none';
+        };
+
+        cancelBtn.onclick = () => {
+            removeModal.style.display = 'none';
+        };
+
+        removeModal.style.display = 'block';
     }
-  
-    function openEditModal(index) {
-      // Populate form fields with current device details
-      document.getElementById('deviceName').value = `Device Name ${index + 1}`;
-      document.getElementById('deviceStatus').value = 'on'; // Default status
-      editModal.style.display = 'block';
+
+    async function openEditModal(deviceId) {
+        if (!deviceId) {
+            console.error("Device ID is missing.");
+            return;
+        }
+    
+        try {
+            const deviceDoc = await getDoc(doc(db, "devices", deviceId));
+            if (!deviceDoc.exists()) {
+                console.error("Device not found:", deviceId);
+                return;
+            }
+    
+            const deviceData = deviceDoc.data();
+    
+            // Attach the device ID to the modal for later use
+            editModal.setAttribute('data-device-id', deviceId);
+    
+            // Populate form fields with actual values from the database
+            document.getElementById('deviceName').value = deviceData.deviceName || '';
+            document.getElementById('deviceStatus').value = deviceData.status || 'off';
+    
+            editModal.style.display = 'block';
+        } catch (error) {
+            console.error("Error fetching device data:", error);
+        }
     }
-  
+
     // Modal close functions
-    closeLogsModal.onclick = () => {
-      logsModal.style.display = 'none';
+    document.getElementById('closeLogsModal').onclick = () => {
+        logsModal.style.display = 'none';
     };
-  
-    closeRemoveModal.onclick = () => {
-      removeModal.style.display = 'none';
+
+    document.getElementById('closeRemoveModal').onclick = () => {
+        removeModal.style.display = 'none';
     };
-  
-    closeEditModal.onclick = () => {
-      editModal.style.display = 'none';
+
+    document.getElementById('closeEditModal').onclick = () => {
+        editModal.style.display = 'none';
     };
-  
-    closeAddDeviceModalBtn.addEventListener('click', () => {
-      addDeviceModal.style.display = 'none';
+
+    document.getElementById('closeModalBtn').addEventListener('click', () => {
+        addDeviceModal.style.display = 'none';
     });
-  
+
     // Close modals if clicked outside
     window.onclick = (event) => {
-      if (event.target === logsModal) {
-        logsModal.style.display = 'none';
-      }
-      if (event.target === removeModal) {
-        removeModal.style.display = 'none';
-      }
-      if (event.target === editModal) {
-        editModal.style.display = 'none';
-      }
-      if (event.target === addDeviceModal) {
-        addDeviceModal.style.display = 'none';
-      }
+        if (event.target === logsModal) {
+            logsModal.style.display = 'none';
+        }
+        if (event.target === removeModal) {
+            removeModal.style.display = 'none';
+        }
+        if (event.target === editModal) {
+            editModal.style.display = 'none';
+        }
+        if (event.target === addDeviceModal) {
+            addDeviceModal.style.display = 'none';
+        }
     };
-  
-    // Handle Edit form submission
-    document.getElementById('editDeviceForm')?.addEventListener('submit', (event) => {
-      event.preventDefault();
-      console.log("Device info edited:", {
-        name: document.getElementById('deviceName').value,
-        status: document.getElementById('deviceStatus').value
-      });
-      editModal.style.display = 'none'; // Close the modal after saving
-    });
-  
-    // Handle device removal
-    function removeDevice(index) {
-      console.log("Device removed:", index + 1);
-      removeModal.style.display = 'none'; // Close the modal after removing
+
+    // Edit button handler
+    async function handleDeviceEdit(event) {
+        event.preventDefault();
+
+        const deviceId = editModal.getAttribute('data-device-id');
+        const updatedName = document.getElementById('deviceName').value;
+        const updatedStatus = document.getElementById('deviceStatus').value;
+
+        try {
+            // Check if deviceId is present
+            if (!deviceId) {
+                console.error("Device ID is missing");
+                return;
+            }
+
+            // Update the device in Firestore
+            await updateDoc(doc(db, "devices", deviceId), {
+                deviceName: updatedName,
+                status: updatedStatus,
+                lastUpdated: serverTimestamp()  // Ensure we update the timestamp
+            });
+
+            console.log("Device ID:", deviceId);  // Check if deviceId is correct
+            console.log("Updated Name:", updatedName);  // Check if updatedName is correct
+            console.log("Updated Status:", updatedStatus);  // Check if updatedStatus is correct
+            console.log('Device successfully updated in database:', deviceId);
+
+            // Dynamically update the UI after successful update
+            const deviceCard = document.querySelector(`[data-id="${deviceId}"]`);
+            if (deviceCard) {
+                deviceCard.querySelector('.deviceName').innerText = updatedName;
+                deviceCard.querySelector('.status-text').innerText = updatedStatus;
+            }
+
+            // Close the modal after saving
+            editModal.style.display = 'none';
+
+        } catch (error) {
+            console.error('Error updating device:', error);
+        }
     }
-  
+
+    // Attach handler to the form submission
+    document.getElementById('editDeviceForm')?.addEventListener('submit', handleDeviceEdit);
+      
+
+    // Handle device removal
+    async function removeDevice(deviceId) {
+        try {
+            if (!deviceId) {
+                console.error("Device ID is null or undefined.");
+                return;
+            }
+
+            // Get the document reference
+            const deviceDocRef = doc(db, "devices", deviceId);
+
+            // Delete the document from Firestore
+            await deleteDoc(deviceDocRef);
+            console.log('Device successfully deleted from database:', deviceId);
+
+            // Remove the device card from the UI
+            const deviceCard = document.querySelector(`[data-id="${deviceId}"]`);
+            if (deviceCard) {
+                deviceCard.remove();
+            } else {
+                console.error('Device card not found in the UI.');
+            }
+        } catch (error) {
+            console.error('Error removing device:', error);
+        }
+    }
+
     // Function to show the Add Device modal with selected device type
     window.showAddUnitModal = function(deviceType) {
       addDeviceModal.style.display = 'block';
@@ -308,7 +406,7 @@ async function displayDevices(deviceIds) {
             deviceName,
             status: deviceStatus,
             type: deviceType,
-            lastUpdated: new Date()
+            lastUpdated: serverTimestamp()
           });
   
           console.log("New device added:", deviceName);
@@ -371,6 +469,6 @@ async function displayDevices(deviceIds) {
         }
       });
     }
-  });
+});
   
 

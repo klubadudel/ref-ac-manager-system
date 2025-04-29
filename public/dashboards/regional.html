@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>7-11 Regional Dashboard</title>
+    <title>7-11 Manager Dashboard</title>
     <link rel="stylesheet" href="../assets/css/styles.css">
-    <script type="module" src="../assets/js/dashboard.js" defer></script>
     <script type="module" src="../assets/js/firebase_config.js" defer></script>
+    <script type="module" src="../assets/js/dashboard.js" defer></script>
 </head>
 <body>
     <div class="dashboard-container">
@@ -27,88 +27,67 @@
             </div>
         </header>
 
-        <div class="sidebar">
-            <div class="branch-list">
-                <h2>NCR Branches</h2>
-                <div class="branch-item"><a href="index1.html">1481 Legarda-Arlegui</a></div>
-                <div class="branch-item"><a href="index2.html">1278 ETON Greenbelt Parkview</a></div>
-            </div>
-        </div>
-
         <main class="dashboard-content">
             <div class="branch-info-card">
                 <h2>Branch Information</h2>
                 <div class="branch-details">
                     <div class="info-item">
                         <label>Branch Name:</label>
-                        <span>1481 Legarda-Arlegui</span>
-                    </div>
-                    <div class="info-item">
-                        <label>Branch ID:</label>
-                        <span>DTN-7110123</span>
-                    </div>
-                    <div class="info-item">
-                        <label>Operating Hours:</label>
-                        <span>24/7</span>
+                        <span id="branchName">--</span>
                     </div>
                     <div class="address-layer">
                         <div class="info-item">
                             <label>Address:</label>
-                            <span>504 Nepomucemo St. Formerly Tanduay St. cor. Arlegui St.</span>
+                            <span id="branchAddress">--</span>
                         </div>
                         <div class="info-item">
-                            <label>City:</label>
-                            <span>CITY OF MANILA Metro Manila</span>
+                            <label>Region:</label>
+                            <span id="branchRegion">--</span>
                         </div>
                     </div>
                 </div>
             </div>
+              
+            <!-- Populate -->
+            <div class="sidebar">
+                <div class="branch-list">
+                    <h2>NCR Branches</h2>
+                    <div class="branch-item"><a href="index1.html">1481 Legarda-Arlegui</a></div>
+                    <div class="branch-item"><a href="index2.html">1278 ETON Greenbelt Parkview</a></div>
+                </div>
+            </div>
+
+            <template id="deviceCardTemplate">
+                <div class="unit-card">
+                  <h3 class="deviceName">--</h3>
+                  <div class="unit-details">
+                    <p>Status: <span class="status-text">--</span></p>
+                    <p>Last Updated: <span class="timestamp">--</span></p>
+                  </div>
+                  <div class="management-options">
+                    <div class="button-group">
+                        <button class="option-btn" onclick="showLogsModal()">Logs</button>
+                        <button class="remove-btn" onclick="showRemoveModal()">Remove</button>
+                        <button class="edit-btn" onclick="showEditModal()">Edit</button>
+                    </div>
+                  </div>
+                </div>
+            </template>
 
             <div class="status-card refrigerators">
                 <h2>Refrigerator Units</h2>
                 <div class="unit-grid" id="refrigeratorUnits">
                     <div class="unit-card">
-                        <h3>Beverage Cooler #1</h3>
-                        <div class="status-indicator on"></div>
+                        <h3 class="deviceName">--</h3>
                         <div class="unit-details">
-                            <p>Status: <span class="status-text">ON</span></p>
-                            <p>Last Updated: <span class="timestamp">2024-03-19 14:30</span></p>
+                            <p>Status: <span class="status-text">--</span></p>
+                            <p>Last Updated: <span class="timestamp">--</span></p>
                         </div>
                         <div class="management-options">
                             <div class="button-group">
-                                <button class="detail-btn" onclick="openModal('Beverage Cooler #1')">Details</button>
-                                <button class="remove-btn" onclick="removeUnit(this)">Remove</button>
-                                <button class="edit-btn" onclick="editUnit(this)">Edit</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="unit-card">
-                        <h3>Ice Cream Freezer</h3>
-                        <div class="status-indicator on"></div>
-                        <div class="unit-details">
-                            <p>Status: <span class="status-text">ON</span></p>
-                            <p>Last Updated: <span class="timestamp">2024-03-19 14:30</span></p>
-                        </div>
-                        <div class="management-options">
-                            <div class="button-group">
-                                <button class="detail-btn" onclick="openModal('Ice Cream Freezer')">Details</button>
-                                <button class="remove-btn" onclick="removeUnit(this)">Remove</button>
-                                <button class="edit-btn" onclick="editUnit(this)">Edit</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="unit-card">
-                        <h3>Food Display Cooler</h3>
-                        <div class="status-indicator off"></div>
-                        <div class="unit-details">
-                            <p>Status: <span class="status-text">OFF</span></p>
-                            <p>Last Updated: <span class="timestamp">2024-03-19 14:30</span></p>
-                        </div>
-                        <div class="management-options">
-                            <div class="button-group">
-                                <button class="detail-btn" onclick="openModal('Food Display Cooler')">Details</button>
-                                <button class="remove-btn" onclick="removeUnit(this)">Remove</button>
-                                <button class="edit-btn" onclick="editUnit(this)">Edit</button>
+                                <button class="option-btn" onclick="showLogsModal()">Logs</button>
+                                <button class="remove-btn" onclick="showRemoveModal()">Remove</button>
+                                <button class="edit-btn" onclick="showEditModal()">Edit</button>
                             </div>
                         </div>
                     </div>
@@ -119,37 +98,94 @@
                 <h2>Air Conditioning Units</h2>
                 <div class="unit-grid" id="airConditioningUnits">
                     <div class="unit-card">
-                        <h3>Main Area AC</h3>
-                        <div class="status-indicator on"></div>
+                        <h3>--</h3>
                         <div class="unit-details">
-                            <p>Status: <span class="status-text">ON</span></p>
-                            <p>Last Updated: <span class="timestamp">2024-03-19 14:30</span></p>
+                            <p>Status: <span class="status-text">--</span></p>
+                            <p>Last Updated: <span class="timestamp">--</span></p>
                         </div>
                         <div class="management-options">
                             <div class="button-group">
-                                <button class="detail-btn" onclick="openModal('Main Area AC')">Details</button>
-                                <button class="remove-btn" onclick="removeUnit(this)">Remove</button>
-                                <button class="edit-btn" onclick="editUnit(this)">Edit</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="unit-card">
-                        <h3>Storage Room AC</h3>
-                        <div class="status-indicator off"></div>
-                        <div class="unit-details">
-                            <p>Status: <span class="status-text">OFF</span></p>
-                            <p>Last Updated: <span class="timestamp">2024-03-19 14:30</span></p>
-                        </div>
-                        <div class="management-options">
-                            <div class="button-group">
-                                <button class="detail-btn" onclick="openModal('Storage Room AC')">Details</button>
-                                <button class="remove-btn" onclick="removeUnit(this)">Remove</button>
-                                <button class="edit-btn" onclick="editUnit(this)">Edit</button>
+                                <button class="option-btn" onclick="showLogsModal()">Logs</button>
+                                <button class="remove-btn" onclick="showRemoveModal()">Remove</button>
+                                <button class="edit-btn" onclick="showEditModal()">Edit</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <div class="unit-card add-unit" onclick="showAddUnitModal('Refrigerator')">
+                <h3>Add New Device Unit</h3>
+                <p>Click here to add a new refrigerator unit.</p>
+            </div>
+
+            <div id="addDeviceModal" class="modal">
+                <div class="modal-content">
+                  <h2>Add New Device</h2>
+                  <form id="addDeviceForm">
+                    <label for="deviceName">Device Name:</label>
+                    <input type="text" id="deviceName" name="deviceName" required>
+              
+                    <label for="deviceStatus">Status:</label>
+                    <select id="deviceStatus" name="deviceStatus">
+                      <option value="on">On</option>
+                      <option value="off">Off</option>
+                    </select>
+              
+                    <label for="deviceType">Device Type:</label>
+                    <select id="deviceType" name="deviceType">
+                      <option value="Refrigerator">Refrigerator</option>
+                      <option value="AC Unit">AC Unit</option>
+                    </select>
+              
+                    <button type="submit">Add Device</button>
+                    <button type="button" id="closeModalBtn">Cancel</button>
+                  </form>
+                </div>
+            </div>
+
+            <!-- Modal for Logs -->
+            <div id="logsModal" class="modal">
+                <div class="modal-content">
+                <span class="close" id="closeLogsModal">&times;</span>
+                <h2>Device Logs</h2>
+                <div id="logsContent">
+                    <!-- Logs will be dynamically loaded here -->
+                </div>
+                </div>
+            </div>
+            
+            <!-- Modal for Remove Confirmation -->
+            <div id="removeModal" class="modal">
+                <div class="modal-content">
+                <span class="close" id="closeRemoveModal">&times;</span>
+                <h2>Remove Device</h2>
+                <p>Are you sure you want to remove this device?</p>
+                <div id="removeConfirmationButtons">
+                    <button type="button" class="action-btn" id="confirmRemove">Yes</button>
+                    <button type="button" class="action-btn" id="cancelRemove">No</button>
+                </div>
+                </div>
+            </div>
+            
+            <!-- Modal for Edit Device -->
+            <div id="editModal" class="modal">
+                <div class="modal-content">
+                <span class="close" id="closeEditModal">&times;</span>
+                <h2>Edit Device</h2>
+                <form id="editDeviceForm">
+                    <label for="deviceName">Device Name:</label>
+                    <input type="text" id="deviceName" name="deviceName" required><br><br>
+                    <label for="deviceStatus">Device Status:</label>
+                    <select id="deviceStatus" name="deviceStatus" required>
+                    <option value="on">On</option>
+                    <option value="off">Off</option>
+                    </select><br><br>
+                    <button type="submit" class="action-btn">Save Changes</button>
+                </form>
+                </div>
+            </div>
+            
         </main>
     </div>
 </body>
