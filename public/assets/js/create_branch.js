@@ -70,30 +70,83 @@ async function fetchUsers() {
   }
 }
 
+// Function to generate region options dynamically
+function generateRegionOptions() {
+  console.log("Generating region options...");
+  const regions = [
+    { name: "NCR", label: "NCR: National Capital Region" },
+    { name: "Region 1: Ilocos Region", label: "Region 1: Ilocos Region" },
+    { name: "Region II: Cagayan Valley", label: "Region II: Cagayan Valley" },
+    { name: "Region III: Central Luzon", label: "Region III: Central Luzon" },
+    { name: "Region IV-A: CALABARZON", label: "Region IV-A: CALABARZON" },
+    { name: "Region IV-B: MIMAROPA", label: "Region IV-B: MIMAROPA" },
+    { name: "Region V: Bicol Region", label: "Region V: Bicol Region" },
+    { name: "Region VI: Western Visayas", label: "Region VI: Western Visayas" },
+    { name: "Region VII: Central Visayas", label: "Region VII: Central Visayas" },
+    { name: "Region VIII: Eastern Visayas", label: "Region VIII: Eastern Visayas" },
+    { name: "Region IX: Zamboanga Peninsula", label: "Region IX: Zamboanga Peninsula" },
+    { name: "Region X: Northern Mindanao", label: "Region X: Northern Mindanao" },
+    { name: "Region XI: Davao Region", label: "Region XI: Davao Region" },
+    { name: "Region XII: SOCCSKSARGEN", label: "Region XII: SOCCSKSARGEN" },
+    { name: "Region XIII: Caraga", label: "Region XIII: Caraga" },
+    { name: "ARMM: Autonomous Region in Muslim Mindanao", label: "ARMM: Autonomous Region in Muslim Mindanao" },
+    { name: "CAR: Cordillera Administrative Region", label: "CAR: Cordillera Administrative Region" }
+  ];
+
+  const regionSelect = document.getElementById("region");
+
+  regions.forEach(region => {
+    const option = document.createElement("option");
+    option.value = region.name; // Store the region name as the value
+    option.textContent = region.label; // Display the region label
+    regionSelect.appendChild(option);
+
+    console.log(`Added region: ${region.name}`);
+  });
+  // Add change listener to detect changes in the region dropdown
+  regionSelect.addEventListener("change", (e) => {
+    console.log("Region changed to:", e.target.value);
+  });
+}
+
 // Function to create a new branch
 async function createBranch(event) {
   event.preventDefault();
 
-  const address = document.getElementById("branchAddress").value;
-  const branchName = document.getElementById("branchName").value;
-  const region = document.getElementById("region").value;
+  console.log("Create Branch function triggered");
 
-  // Gather selected users from the dropdown
+  const addressElement = document.getElementById("branchAddress");
+  const branchNameElement = document.getElementById("branchName");
+  const regionElement = document.getElementById("region");
+
+  if (!addressElement || !branchNameElement || !regionElement) {
+    console.error("Error: One or more required form elements are missing.");
+    alert("Error: Please ensure all required fields are filled in.");
+    return;
+  }
+
+  const address = addressElement.value;
+  const branchName = branchNameElement.value;
+  const region = regionElement.value;
+
+  console.log("Selected region:", region);  // ✅ Log selected region
+
   const userSelect = document.getElementById("users-container");
   const selectedUsers = Array.from(userSelect.selectedOptions).map(option => ({
     userId: option.value,
-    role: option.getAttribute('data-role')  // Correct attribute for user role
+    role: option.getAttribute('data-role')
   }));
 
+  console.log("Branch Data:", { address, branchName, region, selectedUsers });  // ✅ Log all data
+
   try {
-    // Generate a new branch document in Firestore
     const branchRef = doc(collection(db, "branches"));
-    
+
     await setDoc(branchRef, {
-      address: address,
-      branchName: branchName,
-      region: region,
-      users: selectedUsers,  // Array of user assignments
+      address,
+      branchName,
+      region,
+      users: selectedUsers,
       createdAt: new Date()
     });
 
@@ -106,6 +159,7 @@ async function createBranch(event) {
     alert("Error creating branch: " + error.message);
   }
 }
+
 
 // Logout functionality
 document.addEventListener('DOMContentLoaded', () => {
@@ -141,11 +195,14 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Event listener for create branch form
-  const createBranchButton = document.getElementById('createBranchButton');
-  if (createBranchButton) {
-    createBranchButton.addEventListener('click', createBranch);
+  const createBranchForm = document.getElementById('createBranchForm');
+  if (createBranchForm) {
+    createBranchForm.addEventListener('submit', createBranch);
   }
 
   // Fetch users and populate the user select dropdown
   fetchUsers();
+
+  // Generate region options on page load
+  generateRegionOptions();
 });
