@@ -71,7 +71,7 @@ async function fetchUsers() {
 }
 
 // Function to generate region options dynamically
-function generateRegionOptions() {
+export function generateRegionOptions() {
   console.log("Generating region options...");
   const regions = [
     { name: "NCR", label: "NCR: National Capital Region" },
@@ -159,7 +159,6 @@ async function createBranch(event) {
     alert("Error creating branch: " + error.message);
   }
 }
-
 
 // Logout functionality
 document.addEventListener('DOMContentLoaded', () => {
